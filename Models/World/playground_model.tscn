@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" uid="uid://c74mg8nklulkk" path="res://Models/World/playground_model.glb" id="1_rybik"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xuxw3"]
+data = PackedVector3Array(1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a5dnq"]
+data = PackedVector3Array(-1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1, -1, 1, -1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mg56k"]
+data = PackedVector3Array(-1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1, -1, 1, -1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n0tqo"]
+data = PackedVector3Array(-1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1, -1, 1, -1)
+
+[node name="Playground" instance=ExtResource("1_rybik")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_xuxw3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube001" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube001/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_a5dnq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube002" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube002/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_mg56k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube003" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube003/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_n0tqo")

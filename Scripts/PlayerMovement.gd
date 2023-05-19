@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@onready var animation_tree : AnimationTree = get_node("AnimationTree")
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -31,6 +32,8 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	
+	animation_tree["parameters/BlendSpace2D/blend_position"] = input_dir / 2
 	
 func _process(delta):
 	if Input.is_action_pressed("exit"):

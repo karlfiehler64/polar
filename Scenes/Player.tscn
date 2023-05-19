@@ -1,14 +1,175 @@
-[gd_scene load_steps=5 format=3 uid="uid://coemklmde7rqg"]
+[gd_scene load_steps=24 format=3 uid="uid://cobest5bblcr6"]
 
-[ext_resource type="Script" path="res://Scripts/player_movement.gd" id="1_7i6tr"]
-[ext_resource type="Script" path="res://Scripts/camera_movement.gd" id="2_35vpl"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_tvh6i"]
+[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_qra0k"]
+[ext_resource type="Script" path="res://Scripts/WeaponManager.gd" id="3_vu4n2"]
+[ext_resource type="PackedScene" uid="uid://di0qhukswb6ho" path="res://Models/Objects/M4A1.glb" id="3_w8fbu"]
+[ext_resource type="Script" path="res://Models/Objects/M4A1.gd" id="5_xrjjo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6j3ur"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8mblf"]
 
+[sub_resource type="Animation" id="Animation_jo04h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.503, -0.349, -0.618)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/WeaponPlaceholder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ajjfn"]
+resource_name = "object_shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.051069, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.503, -0.349, -0.618), Vector3(0.503, -0.349, -0.514), Vector3(0.503, -0.349, -0.618)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/WeaponPlaceholder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.051069, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.139626, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jefln"]
+resource_name = "walk_sideways"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.503, -0.349, -0.618), Vector3(0.481, -0.349, -0.618), Vector3(0.503, -0.349, -0.618), Vector3(0.535, -0.349, -0.618), Vector3(0.503, -0.349, -0.618)]
+}
+
+[sub_resource type="Animation" id="Animation_dn4lw"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.503, -0.349, -0.618), Vector3(0.503, -0.349, -0.64), Vector3(0.503, -0.349, -0.618), Vector3(0.503, -0.349, -0.586), Vector3(0.503, -0.349, -0.618)]
+}
+
+[sub_resource type="Animation" id="Animation_wc4u1"]
+resource_name = "chill"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.250783, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.503, -0.349, -0.618), Vector3(0.503, -0.347, -0.618), Vector3(0.503, -0.349, -0.618)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ekxyt"]
+_data = {
+"RESET": SubResource("Animation_jo04h"),
+"chill": SubResource("Animation_wc4u1"),
+"object_shoot": SubResource("Animation_ajjfn"),
+"walk": SubResource("Animation_dn4lw"),
+"walk_sideways": SubResource("Animation_jefln")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cgrmj"]
+animation = &"walk_sideways"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1fiwd"]
+animation = &"walk_sideways"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f8tkp"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fg51n"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ii5hm"]
+animation = &"chill"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yk1lt"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_cgrmj")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_1fiwd")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_f8tkp")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_fg51n")
+blend_point_3/pos = Vector2(0, -0.9)
+blend_point_4/node = SubResource("AnimationNodeAnimation_ii5hm")
+blend_point_4/pos = Vector2(0, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qymwr"]
+animation = &"object_shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_extn8"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_d3soh"]
+states/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_yk1lt")
+states/BlendSpace2D/position = Vector2(402, 135)
+states/Start/position = Vector2(154, 118)
+states/object_shoot/node = SubResource("AnimationNodeAnimation_qymwr")
+states/object_shoot/position = Vector2(370, 53)
+transitions = ["Start", "BlendSpace2D", SubResource("AnimationNodeStateMachineTransition_extn8")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_qmiqd"]
+
 [node name="player" type="CharacterBody3D"]
-script = ExtResource("1_7i6tr")
+script = ExtResource("1_tvh6i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_6j3ur")
@@ -17,5 +178,29 @@ shape = SubResource("CapsuleShape3D_6j3ur")
 mesh = SubResource("CapsuleMesh_8mblf")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.639419, 0)
-script = ExtResource("2_35vpl")
+transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 0.639419, 0)
+script = ExtResource("2_qra0k")
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -100)
+debug_shape_thickness = 1
+
+[node name="WeaponPlaceholder" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.503, -0.349, -0.618)
+script = ExtResource("3_vu4n2")
+
+[node name="M4A1" parent="Camera3D/WeaponPlaceholder" instance=ExtResource("3_w8fbu")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("5_xrjjo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ekxyt")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_d3soh")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_qmiqd")
+parameters/BlendSpace2D/blend_position = Vector2(0.00639999, 0.248908)

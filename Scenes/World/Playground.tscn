@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsypflhymw6ya"]
+
+[ext_resource type="PackedScene" uid="uid://cobest5bblcr6" path="res://Scenes/Player.tscn" id="1_2jvx1"]
+[ext_resource type="PackedScene" path="res://Models/World/playground_model.tscn" id="2_th5vg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_f5vlq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pjsg0"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_mtbxt"]
+sky_material = SubResource("ProceduralSkyMaterial_pjsg0")
+
+[sub_resource type="Environment" id="Environment_d7h4q"]
+background_mode = 2
+sky = SubResource("Sky_mtbxt")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Playground" type="Node3D"]
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_2jvx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6738, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18271, -8.09823)
+mesh = SubResource("BoxMesh_f5vlq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d7h4q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Playground" parent="." instance=ExtResource("2_th5vg")]
