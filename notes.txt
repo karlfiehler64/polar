@@ -1,0 +1,2 @@
+fixed camera jitter by setting physics fps to monitor refresh rate
+=> create script that automatically does that 
