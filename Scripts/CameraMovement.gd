@@ -27,10 +27,6 @@ func _process(delta):
 	elif player_object.current_ammo <= 0:
 		print("no more ammo on " + player_object.name)
 		
-
-	
-	
-		
 	if Input.is_action_just_pressed("reload"):
 		player_object.reload()
 	

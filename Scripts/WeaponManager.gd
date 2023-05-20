@@ -3,6 +3,7 @@ extends Node3D
 @onready var current_object : Node3D = self.get_child(0)
 
 @export var default_position : Vector3 
+@export var default_angle : Vector3
 
 var max_aim_sway : float = 40
 var max_walk_sway : Vector2 = Vector2(200,200)
