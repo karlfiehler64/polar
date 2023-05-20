@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var animation_tree : AnimationTree = get_node("AnimationTree")
+@onready var weapon_placeholder = $Camera3D/WeaponPlaceholder
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -41,6 +42,7 @@ func _physics_process(delta):
 		velocity.z = current_direction.z * SPEED
 
 	move_and_slide()
+	weapon_placeholder.jump_sway(velocity.y)
 	
 	#divide velocity magnitude by max speed so the value is between 0 and 1 for blendtree
 	var walk_vector = velocity.length() / SPEED

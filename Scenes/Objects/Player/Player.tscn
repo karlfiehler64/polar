@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cobest5bblcr6"]
+[gd_scene load_steps=26 format=3 uid="uid://cobest5bblcr6"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_tvh6i"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_qra0k"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://di0qhukswb6ho" path="res://Models/Objects/M4A1.glb" id="3_w8fbu"]
 [ext_resource type="Script" path="res://Models/Objects/M4A1.gd" id="5_xrjjo"]
 [ext_resource type="Texture2D" uid="uid://ui6kmgooc56b" path="res://Textures/Player/player_arms_PlayerArms.png" id="6_swsl7"]
+[ext_resource type="Texture2D" uid="uid://bcw3vvefcybxs" path="res://Textures/Player/crosshair.png" id="7_j8hsb"]
 
 [sub_resource type="Animation" id="Animation_jo04h"]
 length = 0.001
@@ -31,7 +32,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, -0.216421, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_wc4u1"]
@@ -76,7 +77,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.051069, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.139626, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, -0.216421, 0), Vector3(0.139626, -0.216421, 0), Vector3(0, -0.216421, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_5e176"]
@@ -167,7 +168,6 @@ animation = &"RESET"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_tni6l"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_87fy8"]
-graph_offset = Vector2(-476.956, 0.768955)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_4f53u")
 nodes/Animation/position = Vector2(-120, 40)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_l7nx0")
@@ -393,9 +393,9 @@ mesh = SubResource("CapsuleMesh_8mblf")
 skeleton = NodePath("../..")
 
 [node name="WeaponPlaceholder" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0.503, -0.349, -0.618)
+transform = Transform3D(1.56268, 0, -0.343577, 0, 1.6, 0, 0.343577, 0, 1.56268, 0.503, -0.349, -0.618)
 script = ExtResource("3_vu4n2")
-default_position = Vector3(0.503, -0.347, -0.618)
+default_position = Vector3(0.418, -0.349, -0.618)
 default_angle = Vector3(0, -21.8, 0)
 
 [node name="M4A1" parent="Camera3D/WeaponPlaceholder" instance=ExtResource("3_w8fbu")]
@@ -723,3 +723,18 @@ skin = SubResource("Skin_3bwsd")
 [node name="left_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/arms/Skeleton3D"]
 mesh = SubResource("ArrayMesh_0xiar")
 skin = SubResource("Skin_3bwsd")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+visible = false
+texture = ExtResource("7_j8hsb")
+centered = false
