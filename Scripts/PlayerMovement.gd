@@ -5,6 +5,8 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+var animation_weight : float = 10
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -12,6 +14,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
+	var smoothed_input = Vector2()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -33,7 +36,11 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-	animation_tree["parameters/BlendSpace2D/blend_position"] = input_dir / 2
+	smoothed_input = lerp(smoothed_input, input_dir, animation_weight * delta)
+	
+
+	
+	print(velocity.z)
 	
 func _process(delta):
 	if Input.is_action_pressed("exit"):

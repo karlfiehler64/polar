@@ -4,6 +4,8 @@ extends Camera3D
 @onready var raycast : RayCast3D = get_node("RayCast3D")
 @onready var animation_player : AnimationPlayer = self.get_parent().get_node("AnimationPlayer")
 @onready var player_object : Node3D = $WeaponPlaceholder.current_object
+@onready var weapon_placeholder = $WeaponPlaceholder
+
 
 var mouse_sensitivity : float = 0.1
 
@@ -12,6 +14,7 @@ func _input(event):
 		player.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
 		rotation.x = clamp(rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		weapon_placeholder.sway(Vector2(event.relative.x, event.relative.y))
 
 func _process(delta):
 	#set range of raycast to range of object player is holding
