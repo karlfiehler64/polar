@@ -1,207 +1,24 @@
-[gd_scene load_steps=26 format=3 uid="uid://kuoh4bm87ll4"]
+[gd_scene load_steps=11 format=3 uid="uid://bpg7tae28qr07"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_tvh6i"]
-[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_qra0k"]
-[ext_resource type="Script" path="res://Scripts/WeaponAnimations.gd" id="3_crdeu"]
-[ext_resource type="PackedScene" uid="uid://di0qhukswb6ho" path="res://Models/Objects/M4A1.glb" id="3_w8fbu"]
-[ext_resource type="Script" path="res://Models/Objects/M4A1.gd" id="5_xrjjo"]
-[ext_resource type="Texture2D" uid="uid://ui6kmgooc56b" path="res://Textures/Player/player_arms_PlayerArms.png" id="6_swsl7"]
-[ext_resource type="Texture2D" uid="uid://bcw3vvefcybxs" path="res://Textures/Player/crosshair.png" id="7_j8hsb"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_u8bjc"]
+[ext_resource type="PackedScene" uid="uid://di0qhukswb6ho" path="res://Models/Objects/M4A1.glb" id="2_mdgev"]
+[ext_resource type="Script" path="res://Models/Objects/M4A1.gd" id="3_xa8r3"]
+[ext_resource type="Texture2D" uid="uid://ui6kmgooc56b" path="res://Textures/Player/player_arms_PlayerArms.png" id="4_08cyv"]
 
-[sub_resource type="Animation" id="Animation_jo04h"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.503, -0.349, -0.618)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mtnxl"]
 
-[sub_resource type="Animation" id="Animation_wc4u1"]
-resource_name = "chill"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.250783, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.503, -0.349, -0.618), Vector3(0.503, -0.347, -0.618), Vector3(0.503, -0.349, -0.618)]
-}
-
-[sub_resource type="Animation" id="Animation_ajjfn"]
-resource_name = "object_shoot"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.048437, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.05), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.048437, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.139626, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_5e176"]
-resource_name = "test_idle"
-length = 0.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.503036, -0.347439, -0.617628)]
-}
-
-[sub_resource type="Animation" id="Animation_fkf0n"]
-resource_name = "test_walk"
-length = 0.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.503, -0.349, -0.502)]
-}
-
-[sub_resource type="Animation" id="Animation_dn4lw"]
-resource_name = "walk"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.503, -0.349, -0.618), Vector3(0.503, -0.347, -0.575), Vector3(0.503, -0.349, -0.589333), Vector3(0.503, -0.349, -0.672), Vector3(0.503, -0.349, -0.618)]
-}
-
-[sub_resource type="Animation" id="Animation_jefln"]
-resource_name = "walk_sideways"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.503, -0.349, -0.618), Vector3(0.481, -0.349, -0.618), Vector3(0.503, -0.349, -0.618), Vector3(0.535, -0.349, -0.618), Vector3(0.503, -0.349, -0.618)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ekxyt"]
-_data = {
-"RESET": SubResource("Animation_jo04h"),
-"chill": SubResource("Animation_wc4u1"),
-"object_shoot": SubResource("Animation_ajjfn"),
-"test_idle": SubResource("Animation_5e176"),
-"test_walk": SubResource("Animation_fkf0n"),
-"walk": SubResource("Animation_dn4lw"),
-"walk_sideways": SubResource("Animation_jefln")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7nx0"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4f53u"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_tni6l"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_87fy8"]
-nodes/Animation/node = SubResource("AnimationNodeAnimation_4f53u")
-nodes/Animation/position = Vector2(-120, 40)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_l7nx0")
-"nodes/Animation 2/position" = Vector2(-140, 180)
-nodes/walk_blend/node = SubResource("AnimationNodeBlend2_tni6l")
-nodes/walk_blend/position = Vector2(109.671, 102.376)
-node_connections = [&"output", 0, &"walk_blend", &"walk_blend", 0, &"Animation", &"walk_blend", 1, &"Animation 2"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6j3ur"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8mblf"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xvht1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cvtf"]
 resource_name = "HandMaterial"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("6_swsl7")
+albedo_texture = ExtResource("4_08cyv")
 roughness = 0.0
 emission_enabled = true
 texture_filter = 2
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8ybac"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_iohsp"]
 resource_name = "player_arms_Cube002"
 _surfaces = [{
 "aabb": AABB(-0.426934, -0.297921, 0.890621, 1.37333, 0.595843, 5.26797),
@@ -220,7 +37,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="Skin" id="Skin_3bwsd"]
+[sub_resource type="Skin" id="Skin_t0grf"]
 resource_name = "Skin"
 bind_count = 44
 bind/0/name = &"UpperArm.R"
@@ -356,7 +173,7 @@ bind/43/name = &"Thumb3.L"
 bind/43/bone = -1
 bind/43/pose = Transform3D(-0.0240365, -3.41126, -0.0289854, 2.626, 7.51079e-08, -2.17766, 2.17753, -0.0376551, 2.62584, -0.0197507, -11.4477, 10.7309)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0xiar"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_unx5x"]
 resource_name = "player_arms_Cube001"
 _surfaces = [{
 "aabb": AABB(-0.426934, -0.297921, -6.1695, 1.37333, 0.595843, 5.26797),
@@ -375,51 +192,31 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[node name="player" type="CharacterBody3D"]
-script = ExtResource("1_tvh6i")
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_u8bjc")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ekxyt")
-}
+[node name="PlayerCollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_mtnxl")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendTree_87fy8")
-anim_player = NodePath("../AnimationPlayer")
-parameters/walk_blend/blend_amount = 0.0
+[node name="PlayerModel" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_xvht1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_6j3ur")
+[node name="PlayerCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619573, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 0.639419, 0)
-script = ExtResource("2_qra0k")
+[node name="PlayerRaycast" type="RayCast3D" parent="PlayerCamera"]
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-target_position = Vector3(0, 0, -100)
-debug_shape_thickness = 1
+[node name="PlayerObjectPlaceholder" type="Node3D" parent="PlayerCamera"]
+transform = Transform3D(0.990268, 0, -0.139173, 0, 1, 0, 0.139173, 0, 0.990268, 0.358, -0.264, -0.462)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
-transform = Transform3D(0.999848, 0, -0.0174524, 0, 1, 0, 0.0174524, 0, 0.999848, 0, -0.639419, 0)
-mesh = SubResource("CapsuleMesh_8mblf")
-skeleton = NodePath("../..")
+[node name="M4A1" parent="PlayerCamera/PlayerObjectPlaceholder" instance=ExtResource("2_mdgev")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00227502, 0, 0.130335)
+script = ExtResource("3_xa8r3")
 
-[node name="WeaponPlaceholder" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1.56268, 0, -0.343578, 0, 1.6, 0, 0.343578, 0, 1.56268, 0.503, -0.349, -0.618)
-script = ExtResource("3_crdeu")
-default_position = Vector3(0.418, -0.349, -0.533)
-default_angle = Vector3(0, -21.8, 0)
+[node name="arms" type="Node3D" parent="PlayerCamera/PlayerObjectPlaceholder"]
+transform = Transform3D(2.32831e-10, 0, 0.183206, 0, 0.183206, 0, -0.183206, 0, 2.32831e-10, -0.314375, 0.218125, 0.750249)
 
-[node name="PlayerRigPlaceholder" type="Node3D" parent="Camera3D/WeaponPlaceholder"]
-
-[node name="M4A1" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder" instance=ExtResource("3_w8fbu")]
-transform = Transform3D(-1, 0, 7.45058e-08, 0, 1, 0, -7.45058e-08, 0, -1, -0.00227502, 0, 0.130335)
-script = ExtResource("5_xrjjo")
-
-[node name="arms" type="Node3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder"]
-transform = Transform3D(0, 0, 0.183206, 0, 0.183206, 0, -0.183206, 0, 0, -0.314375, 0.218125, 0.750249)
-
-[node name="Skeleton3D" type="Skeleton3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms"]
+[node name="Skeleton3D" type="Skeleton3D" parent="PlayerCamera/PlayerObjectPlaceholder/arms"]
 transform = Transform3D(0.00304676, 0, 0.190976, 0, 0.191, 0, -0.190976, 0, 0.00304676, 0.521, -1.33, 1.71)
 bones/0/name = "UpperArm.R"
 bones/0/parent = -1
@@ -730,25 +527,10 @@ bones/43/position = Vector3(2.23517e-08, 0.425899, 1.97906e-09)
 bones/43/rotation = Quaternion(-0.186934, -0.0137009, 0.0700523, 0.979776)
 bones/43/scale = Vector3(1, 1, 1)
 
-[node name="right_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms/Skeleton3D"]
-mesh = SubResource("ArrayMesh_8ybac")
-skin = SubResource("Skin_3bwsd")
+[node name="right_arm" type="MeshInstance3D" parent="PlayerCamera/PlayerObjectPlaceholder/arms/Skeleton3D"]
+mesh = SubResource("ArrayMesh_iohsp")
+skin = SubResource("Skin_t0grf")
 
-[node name="left_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms/Skeleton3D"]
-mesh = SubResource("ArrayMesh_0xiar")
-skin = SubResource("Skin_3bwsd")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Control"]
-visible = false
-texture = ExtResource("7_j8hsb")
-centered = false
+[node name="left_arm" type="MeshInstance3D" parent="PlayerCamera/PlayerObjectPlaceholder/arms/Skeleton3D"]
+mesh = SubResource("ArrayMesh_unx5x")
+skin = SubResource("Skin_t0grf")
