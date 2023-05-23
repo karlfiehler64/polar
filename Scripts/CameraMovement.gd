@@ -19,13 +19,6 @@ func _input(event):
 func _process(delta):
 	#set range of raycast to range of object player is holding
 	raycast.target_position.z = -player_object.range
-	
-	if Input.is_action_just_pressed("action") and player_object.current_ammo > 0:
-		animation_player.play("object_shoot")
-		player_object.current_ammo -= 1
-	
-	elif player_object.current_ammo <= 0:
-		print("no more ammo on " + player_object.name)
 		
 	if Input.is_action_just_pressed("reload"):
 		player_object.reload()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://kuoh4bm87ll4"]
+[gd_scene load_steps=27 format=3 uid="uid://kuoh4bm87ll4"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_tvh6i"]
+[ext_resource type="Animation" uid="uid://sg1kcljcgoqu" path="res://Animations/Player/walk.tres" id="2_hbcp3"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_qra0k"]
 [ext_resource type="Script" path="res://Scripts/WeaponAnimations.gd" id="3_crdeu"]
 [ext_resource type="PackedScene" uid="uid://di0qhukswb6ho" path="res://Models/Objects/M4A1.glb" id="3_w8fbu"]
@@ -66,7 +67,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_ajjfn"]
 resource_name = "object_shoot"
-length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -74,7 +74,7 @@ tracks/0/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:positi
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.048437, 0.3),
+"times": PackedFloat32Array(0, 0.1, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.05), Vector3(0, 0, 0)]
@@ -86,7 +86,7 @@ tracks/1/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:rotati
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.048437, 0.3),
+"times": PackedFloat32Array(0, 0.1, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.139626, 0, 0), Vector3(0, 0, 0)]
@@ -126,23 +126,6 @@ tracks/0/keys = {
 "values": [Vector3(0.503, -0.349, -0.502)]
 }
 
-[sub_resource type="Animation" id="Animation_dn4lw"]
-resource_name = "walk"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/WeaponPlaceholder:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.503, -0.349, -0.618), Vector3(0.503, -0.347, -0.575), Vector3(0.503, -0.349, -0.589333), Vector3(0.503, -0.349, -0.672), Vector3(0.503, -0.349, -0.618)]
-}
-
 [sub_resource type="Animation" id="Animation_jefln"]
 resource_name = "walk_sideways"
 length = 0.4
@@ -160,33 +143,86 @@ tracks/0/keys = {
 "values": [Vector3(0.503, -0.349, -0.618), Vector3(0.481, -0.349, -0.618), Vector3(0.503, -0.349, -0.618), Vector3(0.535, -0.349, -0.618), Vector3(0.503, -0.349, -0.618)]
 }
 
+[sub_resource type="Animation" id="Animation_p2nsm"]
+resource_name = "object_reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.542, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.21824, 0.174533, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ekxyt"]
 _data = {
 "RESET": SubResource("Animation_jo04h"),
 "chill": SubResource("Animation_wc4u1"),
+"object_reload": SubResource("Animation_p2nsm"),
 "object_shoot": SubResource("Animation_ajjfn"),
 "test_idle": SubResource("Animation_5e176"),
 "test_walk": SubResource("Animation_fkf0n"),
-"walk": SubResource("Animation_dn4lw"),
+"walk": ExtResource("2_hbcp3"),
 "walk_sideways": SubResource("Animation_jefln")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7nx0"]
-animation = &"walk"
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7if8l"]
+_data = {
+"walk": ExtResource("2_hbcp3")
+}
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4f53u"]
-animation = &"RESET"
+[sub_resource type="Animation" id="Animation_gi85p"]
+resource_name = "walk"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.022), Vector3(0, 0, 0), Vector3(0, 0, -0.022), Vector3(0, 0, 0)]
+}
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_tni6l"]
+[sub_resource type="Animation" id="Animation_4foba"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera3D/WeaponPlaceholder/PlayerRigPlaceholder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_87fy8"]
-nodes/Animation/node = SubResource("AnimationNodeAnimation_4f53u")
-nodes/Animation/position = Vector2(-120, 40)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_l7nx0")
-"nodes/Animation 2/position" = Vector2(-140, 180)
-nodes/walk_blend/node = SubResource("AnimationNodeBlend2_tni6l")
-nodes/walk_blend/position = Vector2(109.671, 102.376)
-node_connections = [&"output", 0, &"walk_blend", &"walk_blend", 0, &"Animation", &"walk_blend", 1, &"Animation 2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xwn32"]
+_data = {
+"RESET": SubResource("Animation_4foba"),
+"walk": SubResource("Animation_gi85p")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6j3ur"]
 
@@ -380,13 +416,15 @@ script = ExtResource("1_tvh6i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ekxyt")
+"": SubResource("AnimationLibrary_ekxyt"),
+"PlayerAnimations": SubResource("AnimationLibrary_7if8l")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendTree_87fy8")
-anim_player = NodePath("../AnimationPlayer")
-parameters/walk_blend/blend_amount = 0.0
+[node name="WalkAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_xwn32")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_6j3ur")
@@ -752,3 +790,5 @@ grow_vertical = 2
 visible = false
 texture = ExtResource("7_j8hsb")
 centered = false
+
+[connection signal="animation_finished" from="AnimationPlayer" to="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1" method="_on_animation_player_animation_finished"]

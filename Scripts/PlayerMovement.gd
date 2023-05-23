@@ -1,11 +1,13 @@
 extends CharacterBody3D
 
-@onready var animation_tree : AnimationTree = get_node("AnimationTree")
+@onready var animation_player = $WalkAnimationPlayer
 @onready var weapon_placeholder = $Camera3D/WeaponPlaceholder
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const air_density : float = 1
+
+var minimum_animation_speed_threshold : float = 0.4
 
 var current_direction : Vector3 
 
@@ -37,6 +39,15 @@ func _physics_process(delta):
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+		if velocity.length() > minimum_animation_speed_threshold and !weapon_placeholder.is_reloading:
+			animation_player.speed_scale = 1.0 / (velocity.length() / SPEED)
+			animation_player.play("walk")
+		else:
+			animation_player.stop()
+			
+		
+		
 	elif current_direction:
 		velocity.x = current_direction.x * SPEED
 		velocity.z = current_direction.z * SPEED
@@ -47,7 +58,6 @@ func _physics_process(delta):
 	#divide velocity magnitude by max speed so the value is between 0 and 1 for blendtree
 	var walk_vector = velocity.length() / SPEED
 	
-	animation_tree.set("parameters/walk_blend/blend_amount", walk_vector)
 		
 func _process(delta):
 	if Input.is_action_pressed("exit"):
