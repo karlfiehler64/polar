@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var animation_player = $WalkAnimationPlayer
+@onready var audiostream_player = $AudioStreamPlayer3D
 @onready var weapon_placeholder = $Camera3D/WeaponPlaceholder
 
 const SPEED = 5.0
@@ -13,11 +14,16 @@ var current_direction : Vector3
 
 var animation_weight : float = 10
 
+var random : RandomNumberGenerator
+
+var audio_pitch_range : float = 0.2
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	random = RandomNumberGenerator.new()
 
 func _physics_process(delta):
 	var smoothed_input = Vector2()
@@ -43,6 +49,9 @@ func _physics_process(delta):
 		if velocity.length() > minimum_animation_speed_threshold and !weapon_placeholder.is_reloading:
 			animation_player.speed_scale = 1.0 / (velocity.length() / SPEED)
 			animation_player.play("walk")
+			audiostream_player.pitch_scale = random.randf_range(1 - audio_pitch_range, audio_pitch_range)
+			
+			
 		else:
 			animation_player.stop()
 			

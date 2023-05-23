@@ -1,12 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://kuoh4bm87ll4"]
+[gd_scene load_steps=30 format=3 uid="uid://kuoh4bm87ll4"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_tvh6i"]
 [ext_resource type="Animation" uid="uid://sg1kcljcgoqu" path="res://Animations/Player/walk.tres" id="2_hbcp3"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="2_qra0k"]
 [ext_resource type="Script" path="res://Scripts/WeaponAnimations.gd" id="3_crdeu"]
+[ext_resource type="AudioStream" uid="uid://bxbnkawolbwpi" path="res://SoundEffects/reload.wav" id="3_jnsce"]
+[ext_resource type="AudioStream" uid="uid://3ga0fednor0w" path="res://SoundEffects/walk.wav" id="3_ksg6k"]
 [ext_resource type="PackedScene" uid="uid://di0qhukswb6ho" path="res://Models/Objects/M4A1.glb" id="3_w8fbu"]
 [ext_resource type="Script" path="res://Models/Objects/M4A1.gd" id="5_xrjjo"]
 [ext_resource type="Texture2D" uid="uid://ui6kmgooc56b" path="res://Textures/Player/player_arms_PlayerArms.png" id="6_swsl7"]
+[ext_resource type="AudioStream" uid="uid://b6t2mpco5gseq" path="res://SoundEffects/shoot.wav" id="6_uitqr"]
 [ext_resource type="Texture2D" uid="uid://bcw3vvefcybxs" path="res://Textures/Player/crosshair.png" id="7_j8hsb"]
 
 [sub_resource type="Animation" id="Animation_jo04h"]
@@ -91,6 +94,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.139626, 0, 0), Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/WeaponPlaceholder/GunAudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_5e176"]
 resource_name = "test_idle"
@@ -169,6 +184,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-1.21824, 0.174533, 0), Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/WeaponPlaceholder/GunAudioStreamPlayer:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_jnsce"), ExtResource("6_uitqr")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D/WeaponPlaceholder/GunAudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ekxyt"]
 _data = {
@@ -201,6 +240,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.022), Vector3(0, 0, 0), Vector3(0, 0, -0.022), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_4foba"]
@@ -426,6 +477,11 @@ libraries = {
 "": SubResource("AnimationLibrary_xwn32")
 }
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ksg6k")
+volume_db = -36.822
+bus = &"Walk"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_6j3ur")
 
@@ -447,6 +503,11 @@ transform = Transform3D(1.56268, 0, -0.343578, 0, 1.6, 0, 0.343578, 0, 1.56268, 
 script = ExtResource("3_crdeu")
 default_position = Vector3(0.418, -0.349, -0.533)
 default_angle = Vector3(0, -21.8, 0)
+
+[node name="GunAudioStreamPlayer" type="AudioStreamPlayer3D" parent="Camera3D/WeaponPlaceholder"]
+transform = Transform3D(0.624998, 0, 1.49012e-08, 0, 0.625, 0, -7.45058e-09, 0, 0.624998, 0, 0, 0)
+stream = ExtResource("6_uitqr")
+bus = &"Shoot"
 
 [node name="PlayerRigPlaceholder" type="Node3D" parent="Camera3D/WeaponPlaceholder"]
 
