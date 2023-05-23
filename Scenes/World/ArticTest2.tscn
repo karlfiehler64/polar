@@ -15,6 +15,7 @@ background_mode = 2
 sky = SubResource("Sky_6ebpv")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
 
 [node name="Node3D" type="Node3D"]
 

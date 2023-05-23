@@ -485,6 +485,21 @@ bus = &"Walk"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_6j3ur")
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+visible = false
+texture = ExtResource("7_j8hsb")
+centered = false
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 0.639419, 0)
 script = ExtResource("2_qra0k")
@@ -836,20 +851,5 @@ skin = SubResource("Skin_3bwsd")
 [node name="left_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms/Skeleton3D"]
 mesh = SubResource("ArrayMesh_0xiar")
 skin = SubResource("Skin_3bwsd")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Control"]
-visible = false
-texture = ExtResource("7_j8hsb")
-centered = false
 
 [connection signal="animation_finished" from="AnimationPlayer" to="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1" method="_on_animation_player_animation_finished"]

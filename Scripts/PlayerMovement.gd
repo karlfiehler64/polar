@@ -50,12 +50,8 @@ func _physics_process(delta):
 			animation_player.speed_scale = 1.0 / (velocity.length() / SPEED)
 			animation_player.play("walk")
 			audiostream_player.pitch_scale = random.randf_range(1 - audio_pitch_range, audio_pitch_range)
-			
-			
 		else:
 			animation_player.stop()
-			
-		
 		
 	elif current_direction:
 		velocity.x = current_direction.x * SPEED

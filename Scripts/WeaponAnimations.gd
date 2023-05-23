@@ -15,6 +15,8 @@ var random : RandomNumberGenerator
 
 var is_reloading : bool = false
 
+#CHECK IF ANY OF THIS IS AFFECTED BY FRAMERATE
+
 func _ready():
 	random = RandomNumberGenerator.new()
 

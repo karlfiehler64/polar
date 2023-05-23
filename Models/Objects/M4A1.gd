@@ -9,11 +9,10 @@ var object_name : String = "M4A4"
 var range : float = 100
 var can_shoot : bool = true
 var is_reloading : bool = false
-var rpm : int = 860
+var rpm : int = 700
 var spray_strength : float = 0.025
 
 var shot_timer : Timer 
-
 
 func _ready():
 	shot_timer = Timer.new()
@@ -22,7 +21,6 @@ func _ready():
 	add_child(shot_timer)
 	
 	shot_timer.timeout.connect(_on_shot_Timer_timeout)
-	
 	
 	animation_player.speed_scale = rpm / 60
 
