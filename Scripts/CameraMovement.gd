@@ -26,6 +26,7 @@ func _input(event):
 		weapon_placeholder.aim_sway(Vector2(event.relative.x, event.relative.y))
 
 func _process(delta):
+	rotation.z = 0
 	_delta = delta
 	#set range of raycast to range of object player is holding
 	raycast.target_position.z = -player_object.range

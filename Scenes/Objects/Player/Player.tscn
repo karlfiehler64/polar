@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bxbnkawolbwpi" path="res://SoundEffects/reload.wav" id="3_jnsce"]
 [ext_resource type="AudioStream" uid="uid://3ga0fednor0w" path="res://SoundEffects/walk.wav" id="3_ksg6k"]
 [ext_resource type="PackedScene" uid="uid://di0qhukswb6ho" path="res://Models/Objects/M4A1.glb" id="3_w8fbu"]
-[ext_resource type="Script" path="res://Models/Objects/M4A1.gd" id="5_xrjjo"]
+[ext_resource type="Script" path="res://Scripts/M4A1.gd" id="5_xrjjo"]
 [ext_resource type="Texture2D" uid="uid://ui6kmgooc56b" path="res://Textures/Player/player_arms_PlayerArms.png" id="6_swsl7"]
 [ext_resource type="AudioStream" uid="uid://b6t2mpco5gseq" path="res://SoundEffects/shoot.wav" id="6_uitqr"]
 [ext_resource type="Texture2D" uid="uid://bcw3vvefcybxs" path="res://Textures/Player/crosshair.png" id="7_j8hsb"]
