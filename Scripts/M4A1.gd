@@ -33,7 +33,9 @@ func _process(delta):
 		current_ammo -= 1
 		shot_timer.start()
 		can_shoot = false
-	
+		
+	if Input.is_action_pressed("reload"):
+		reload()
 
 func reload():
 	can_shoot = false

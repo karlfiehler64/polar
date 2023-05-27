@@ -20,9 +20,6 @@ glow_enabled = true
 
 [node name="Playground" type="Node3D"]
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_2jvx1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6738, 0)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18271, -8.09823)
 mesh = SubResource("BoxMesh_f5vlq")
@@ -35,3 +32,6 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Playground" parent="." instance=ExtResource("2_th5vg")]
+
+[node name="player" parent="." instance=ExtResource("1_2jvx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86623, 0)

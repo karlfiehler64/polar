@@ -58,7 +58,7 @@ func _physics_process(delta):
 		velocity.z = current_direction.z * SPEED
 
 	move_and_slide()
-	weapon_placeholder.jump_sway(velocity.y)
+	
 	
 	#divide velocity magnitude by max speed so the value is between 0 and 1 for blendtree
 	var walk_vector = velocity.length() / SPEED

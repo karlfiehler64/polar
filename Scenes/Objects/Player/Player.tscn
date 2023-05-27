@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/M4A1.gd" id="5_xrjjo"]
 [ext_resource type="Texture2D" uid="uid://ui6kmgooc56b" path="res://Textures/Player/player_arms_PlayerArms.png" id="6_swsl7"]
 [ext_resource type="AudioStream" uid="uid://b6t2mpco5gseq" path="res://SoundEffects/shoot.wav" id="6_uitqr"]
-[ext_resource type="Texture2D" uid="uid://bcw3vvefcybxs" path="res://Textures/Player/crosshair.png" id="7_j8hsb"]
+[ext_resource type="PackedScene" uid="uid://bc5vomei2paj7" path="res://sprite_crosshair.tscn" id="11_cbw7d"]
 
 [sub_resource type="Animation" id="Animation_jo04h"]
 length = 0.001
@@ -485,23 +485,8 @@ bus = &"Walk"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_6j3ur")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Control"]
-visible = false
-texture = ExtResource("7_j8hsb")
-centered = false
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0, 0.639419, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.639419, 0)
 script = ExtResource("2_qra0k")
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
@@ -514,10 +499,11 @@ mesh = SubResource("CapsuleMesh_8mblf")
 skeleton = NodePath("../..")
 
 [node name="WeaponPlaceholder" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1.56268, 0, -0.343578, 0, 1.6, 0, 0.343578, 0, 1.56268, 0.503, -0.349, -0.618)
+transform = Transform3D(1.59766, 0, -0.0865263, 0, 1.6, 0, 0.0865263, 0, 1.59766, 0.503, -0.349, -0.618)
 script = ExtResource("3_crdeu")
-default_position = Vector3(0.418, -0.349, -0.533)
-default_angle = Vector3(0, -21.8, 0)
+default_position = Vector3(0.314, -0.357, -0.369)
+default_angle = Vector3(0, -3.1, 0)
+walk_sway_strength = 0.002
 
 [node name="GunAudioStreamPlayer" type="AudioStreamPlayer3D" parent="Camera3D/WeaponPlaceholder"]
 transform = Transform3D(0.624998, 0, 1.49012e-08, 0, 0.625, 0, -7.45058e-09, 0, 0.624998, 0, 0, 0)
@@ -527,11 +513,11 @@ bus = &"Shoot"
 [node name="PlayerRigPlaceholder" type="Node3D" parent="Camera3D/WeaponPlaceholder"]
 
 [node name="M4A1" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder" instance=ExtResource("3_w8fbu")]
-transform = Transform3D(-1, 0, 7.45058e-08, 0, 1, 0, -7.45058e-08, 0, -1, -0.00227502, 0, 0.130335)
+transform = Transform3D(-1, 0, 7.45058e-08, 0, 1, 0, -7.45058e-08, 0, -1, -0.002, 0, 0.001)
 script = ExtResource("5_xrjjo")
 
 [node name="arms" type="Node3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder"]
-transform = Transform3D(0, 0, 0.183206, 0, 0.183206, 0, -0.183206, 0, 0, -0.314375, 0.218125, 0.750249)
+transform = Transform3D(0, 0, 0.183206, 0, 0.183206, 0, -0.183206, 0, 0, -0.314, 0.218, 0.617)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms"]
 transform = Transform3D(0.00304676, 0, 0.190976, 0, 0.191, 0, -0.190976, 0, 0.00304676, 0.521, -1.33, 1.71)
@@ -851,5 +837,7 @@ skin = SubResource("Skin_3bwsd")
 [node name="left_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms/Skeleton3D"]
 mesh = SubResource("ArrayMesh_0xiar")
 skin = SubResource("Skin_3bwsd")
+
+[node name="Sprite2D" parent="." instance=ExtResource("11_cbw7d")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1" method="_on_animation_player_animation_finished"]
