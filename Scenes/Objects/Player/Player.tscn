@@ -516,6 +516,8 @@ bus = &"Shoot"
 transform = Transform3D(-1, 0, 7.45058e-08, 0, 1, 0, -7.45058e-08, 0, -1, -0.002, 0, 0.001)
 script = ExtResource("5_xrjjo")
 
+[node name="Sprite2D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1" instance=ExtResource("11_cbw7d")]
+
 [node name="arms" type="Node3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder"]
 transform = Transform3D(0, 0, 0.183206, 0, 0.183206, 0, -0.183206, 0, 0, -0.314, 0.218, 0.617)
 
@@ -837,7 +839,5 @@ skin = SubResource("Skin_3bwsd")
 [node name="left_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms/Skeleton3D"]
 mesh = SubResource("ArrayMesh_0xiar")
 skin = SubResource("Skin_3bwsd")
-
-[node name="Sprite2D" parent="." instance=ExtResource("11_cbw7d")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1" method="_on_animation_player_animation_finished"]

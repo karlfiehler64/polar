@@ -3,6 +3,7 @@ extends Node3D
 @onready var animation_player = $"../../../../AnimationPlayer"
 @onready var weapon_placeholder = $"../.."
 @onready var camera = $"../../.."
+@onready var crosshair = $Sprite2D
 
 var current_ammo : int = 30
 var ammo : int = 30
@@ -27,6 +28,7 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_pressed("action") and can_shoot == true and current_ammo >= 0 and !is_reloading:
+		crosshair.crosshair_move(delta)
 		animation_player.play("object_shoot")
 		camera.camera_shake(0.01, 0.01)
 		weapon_placeholder.shot_sway(spray_strength)
