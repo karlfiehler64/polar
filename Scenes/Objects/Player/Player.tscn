@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://kuoh4bm87ll4"]
+[gd_scene load_steps=33 format=3 uid="uid://kuoh4bm87ll4"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_tvh6i"]
 [ext_resource type="Animation" uid="uid://sg1kcljcgoqu" path="res://Animations/Player/walk.tres" id="2_hbcp3"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://Scripts/M4A1.gd" id="5_xrjjo"]
 [ext_resource type="Texture2D" uid="uid://ui6kmgooc56b" path="res://Textures/Player/player_arms_PlayerArms.png" id="6_swsl7"]
 [ext_resource type="AudioStream" uid="uid://b6t2mpco5gseq" path="res://SoundEffects/shoot.wav" id="6_uitqr"]
+[ext_resource type="PackedScene" path="res://crt_shader.tscn" id="7_u256k"]
+[ext_resource type="Shader" path="res://crtTV.gdshader" id="8_2o0g6"]
 [ext_resource type="PackedScene" uid="uid://bc5vomei2paj7" path="res://sprite_crosshair.tscn" id="11_cbw7d"]
 
 [sub_resource type="Animation" id="Animation_jo04h"]
@@ -97,7 +99,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Camera3D/WeaponPlaceholder/GunAudioStreamPlayer:stream")
+tracks/2/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1/GunAudioStreamPlayer:stream")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -109,7 +111,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Camera3D/WeaponPlaceholder/GunAudioStreamPlayer:playing")
+tracks/3/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1/GunAudioStreamPlayer:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -148,7 +150,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Camera3D/WeaponPlaceholder/GunAudioStreamPlayer:playing")
+tracks/2/path = NodePath("Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1/GunAudioStreamPlayer:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -278,6 +280,30 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6j3ur"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8mblf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_detgy"]
+shader = ExtResource("8_2o0g6")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cvtf"]
 resource_name = "HandMaterial"
@@ -498,17 +524,15 @@ transform = Transform3D(0.999848, 0, -0.0174524, 0, 1, 0, 0.0174524, 0, 0.999848
 mesh = SubResource("CapsuleMesh_8mblf")
 skeleton = NodePath("../..")
 
+[node name="CrtShader" parent="Camera3D" instance=ExtResource("7_u256k")]
+material = SubResource("ShaderMaterial_detgy")
+
 [node name="WeaponPlaceholder" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1.59766, 0, -0.0865263, 0, 1.6, 0, 0.0865263, 0, 1.59766, 0.503, -0.349, -0.618)
 script = ExtResource("3_crdeu")
 default_position = Vector3(0.314, -0.357, -0.369)
 default_angle = Vector3(0, -3.1, 0)
 walk_sway_strength = 0.002
-
-[node name="GunAudioStreamPlayer" type="AudioStreamPlayer3D" parent="Camera3D/WeaponPlaceholder"]
-transform = Transform3D(0.624998, 0, 1.49012e-08, 0, 0.625, 0, -7.45058e-09, 0, 0.624998, 0, 0, 0)
-stream = ExtResource("6_uitqr")
-bus = &"Shoot"
 
 [node name="PlayerRigPlaceholder" type="Node3D" parent="Camera3D/WeaponPlaceholder"]
 
@@ -518,10 +542,15 @@ script = ExtResource("5_xrjjo")
 
 [node name="Sprite2D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1" instance=ExtResource("11_cbw7d")]
 
-[node name="arms" type="Node3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder"]
-transform = Transform3D(0, 0, 0.183206, 0, 0.183206, 0, -0.183206, 0, 0, -0.314, 0.218, 0.617)
+[node name="GunAudioStreamPlayer" type="AudioStreamPlayer3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1"]
+transform = Transform3D(-0.625, 0, -5.21541e-08, 0, 0.625, 0, 4.84288e-08, 0, -0.625, -0.002, 0, 0.00100002)
+stream = ExtResource("6_uitqr")
+bus = &"Shoot"
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms"]
+[node name="arms" type="Node3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1"]
+transform = Transform3D(1.21072e-08, 0, -0.183206, 0, 0.183206, 0, 0.183206, 0, 1.21072e-08, 0.312, 0.218, -0.616)
+
+[node name="Skeleton3D" type="Skeleton3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1/arms"]
 transform = Transform3D(0.00304676, 0, 0.190976, 0, 0.191, 0, -0.190976, 0, 0.00304676, 0.521, -1.33, 1.71)
 bones/0/name = "UpperArm.R"
 bones/0/parent = -1
@@ -832,11 +861,11 @@ bones/43/position = Vector3(2.23517e-08, 0.425899, 1.97906e-09)
 bones/43/rotation = Quaternion(-0.186934, -0.0137009, 0.0700523, 0.979776)
 bones/43/scale = Vector3(1, 1, 1)
 
-[node name="right_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms/Skeleton3D"]
+[node name="right_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1/arms/Skeleton3D"]
 mesh = SubResource("ArrayMesh_8ybac")
 skin = SubResource("Skin_3bwsd")
 
-[node name="left_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/arms/Skeleton3D"]
+[node name="left_arm" type="MeshInstance3D" parent="Camera3D/WeaponPlaceholder/PlayerRigPlaceholder/M4A1/arms/Skeleton3D"]
 mesh = SubResource("ArrayMesh_0xiar")
 skin = SubResource("Skin_3bwsd")
 
