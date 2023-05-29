@@ -9,14 +9,13 @@ extends Node3D
 @onready var default_position : Vector3 = position
 @onready var default_angle : Vector3 = rotation
 
-var max_aim_sway : float = 10
+var max_aim_sway : float = 8
 var max_walk_sway : Vector2 = Vector2(200,200)
+var min_sway_threshold : float = 0
 
-@export var aim_sway_strength : float = 0.001
+@export var aim_sway_strength : float = 0.0003
 @export var walk_sway_strength : float = 0.001
 @export var jump_sway_strength : float = 0.0005
-
-
 
 
 var input_dir : Vector2 = Vector2()
@@ -62,4 +61,5 @@ func aim_sway(sway_amount, strength):
 	
 func _input(event):
 	if event is InputEventMouseMotion:
-		aim_sway(Vector2(event.relative.x, event.relative.y), aim_sway_strength)
+		if event.relative.length() > min_sway_threshold:
+			aim_sway(Vector2(event.relative.x, event.relative.y), aim_sway_strength)

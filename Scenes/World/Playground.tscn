@@ -34,4 +34,4 @@ shadow_enabled = true
 [node name="Playground" parent="." instance=ExtResource("2_th5vg")]
 
 [node name="Player" parent="." instance=ExtResource("2_dbcwe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 3.97857, 0.421851)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0647154, 3.48936, 0.709344)

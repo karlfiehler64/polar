@@ -1,6 +1,9 @@
 extends CharacterBody3D
 
-@onready var animation_player = $GameManager/WalkAnimationPlayer
+@onready var game_manager = $GameManager
+@onready var animation_player = game_manager.walk_animation_player
+@onready var animation_tree = game_manager.walk_animation_tree
+@onready var walk_state_machine = animation_tree["parameters/playback"]
 @onready var audiostream_player = $GameManager/AudioStreamPlayer3D
 @onready var weapon_manager = $Camera3D/WeaponAnimations/WeaponManager
 
@@ -47,11 +50,11 @@ func _physics_process(delta):
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 		
 		if velocity.length() > minimum_animation_speed_threshold and !weapon_manager.is_reloading:
-			animation_player.speed_scale = 1.0 / (velocity.length() / SPEED)
-			animation_player.play("walk")
+			walk_state_machine.travel("walk")
 			audiostream_player.pitch_scale = random.randf_range(1 - audio_pitch_range, audio_pitch_range)
 		else:
-			animation_player.stop()
+			walk_state_machine.travel("idle")
+		
 		
 	elif current_direction:
 		velocity.x = current_direction.x * SPEED
