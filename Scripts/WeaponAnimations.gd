@@ -1,18 +1,19 @@
 extends Node3D
 
-@onready var current_object : Node3D = $PlayerRigPlaceholder/M4A1
 @onready var camera = $".."
 @onready var player = $"../.."
 
-@export var default_position : Vector3 
-@export var default_angle : Vector3
-@onready var player_object = $PlayerRigPlaceholder/M4A1
 
-var max_aim_sway : float = 40
+@onready var player_object = $WeaponManager/M4A1
+
+@onready var default_position : Vector3 = position
+@onready var default_angle : Vector3 = rotation
+
+var max_aim_sway : float = 10
 var max_walk_sway : Vector2 = Vector2(200,200)
 
 @export var aim_sway_strength : float = 0.001
-@export var walk_sway_strength : float = 0.003
+@export var walk_sway_strength : float = 0.001
 @export var jump_sway_strength : float = 0.0005
 
 

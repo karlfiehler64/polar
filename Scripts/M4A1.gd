@@ -1,20 +1,22 @@
 extends Node3D
 
-@onready var animation_player = $"../../../../AnimationPlayer"
+@onready var animation_player = $AnimationPlayer_M4A1
 @onready var weapon_placeholder = $"../.."
-@onready var camera = $"../../.."
-@onready var crosshair = $Sprite2D
+@onready var camera = $"../../../../GameManager".current_camera
+@onready var crosshair = $crosshair
 
 var current_ammo : int = 30
 var ammo : int = 30
-var object_name : String = "M4A4"
+var object_name : String = "M4A1"
 var range : float = 100
 var can_shoot : bool = true
 var is_reloading : bool = false
-var rpm : int = 700
+var rpm : int = 800
 var spray_strength : float = 0.025
 
 var shot_timer : Timer 
+
+#connect animation player timeout signal
 
 func _ready():
 	shot_timer = Timer.new()
@@ -23,6 +25,7 @@ func _ready():
 	add_child(shot_timer)
 	
 	shot_timer.timeout.connect(_on_shot_Timer_timeout)
+	animation_player.connect("animation_finished", _on_animation_player_animation_finished)
 	
 	animation_player.speed_scale = rpm / 60
 
@@ -35,6 +38,7 @@ func _process(delta):
 		current_ammo -= 1
 		shot_timer.start()
 		can_shoot = false
+		print("shoot")
 		
 	if Input.is_action_pressed("reload"):
 		reload()
@@ -45,10 +49,12 @@ func reload():
 	current_ammo = ammo
 	animation_player.speed_scale = 1
 	animation_player.play("object_reload")
+	print("reload")
 	
 
 func _on_shot_Timer_timeout():
 	can_shoot = true
+	print("reload done")
 
 
 func _on_animation_player_animation_finished(anim_name):
