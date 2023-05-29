@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://cygbtjnl3uij0"]
+
+[ext_resource type="PackedScene" uid="uid://b6cfpfffoqdua" path="res://Models/World/polar_island_model.tscn" id="1_tossq"]
+[ext_resource type="Shader" path="res://Shaders/SimpleWaterShader.gdshader" id="2_ad0u6"]
+[ext_resource type="Texture2D" uid="uid://c6018bw0b4li4" path="res://Textures/World/Elements_09-128x128.png" id="3_4nmb6"]
+[ext_resource type="PackedScene" uid="uid://bosldx6yxgm4k" path="res://Scenes/player_revised.tscn" id="4_cjdwj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yiwiu"]
+render_priority = 0
+shader = ExtResource("2_ad0u6")
+shader_parameter/speed = 0.05
+shader_parameter/scale = Vector2(4, 4)
+shader_parameter/blue_intensity = 2.0
+shader_parameter/textureSampler = ExtResource("3_4nmb6")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nid1o"]
+material = SubResource("ShaderMaterial_yiwiu")
+
+[sub_resource type="Environment" id="Environment_px7cr"]
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.0
+reflected_light_source = 1
+tonemap_mode = 2
+ssil_enabled = true
+ssil_radius = 5.61
+ssil_intensity = 1.67
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0078
+volumetric_fog_emission = Color(0.768627, 0.768627, 0.768627, 1)
+volumetric_fog_length = 170.5
+
+[node name="Node3D" type="Node3D"]
+
+[node name="polar_island" parent="." instance=ExtResource("1_tossq")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 14.111, -14.9419, 0)
+mesh = SubResource("PlaneMesh_nid1o")
+
+[node name="Player" parent="." instance=ExtResource("4_cjdwj")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_px7cr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]

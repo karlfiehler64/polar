@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://bosldx6yxgm4k"]
+[gd_scene load_steps=30 format=3 uid="uid://bosldx6yxgm4k"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_nrmwm"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_gc143"]
+[ext_resource type="Shader" path="res://Shaders/crtTV.gdshader" id="3_hse0x"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="3_j03e2"]
 [ext_resource type="Script" path="res://Scripts/WeaponAnimations.gd" id="4_h3kmq"]
 [ext_resource type="Script" path="res://Scripts/WeaponManager.gd" id="5_k7t50"]
@@ -9,7 +10,49 @@
 [ext_resource type="Script" path="res://Scripts/M4A1.gd" id="7_mb7rs"]
 [ext_resource type="PackedScene" path="res://Scenes/UI/sprite_crosshair.tscn" id="8_g4s7h"]
 [ext_resource type="Texture2D" uid="uid://ciqil1tega5qk" path="res://Textures/Objects/Crosshairs/image0000.png" id="9_g50oq"]
-[ext_resource type="PackedScene" path="res://Scenes/arms.tscn" id="9_h5org"]
+[ext_resource type="PackedScene" uid="uid://dnycm1wwkb6u1" path="res://Scenes/arms.tscn" id="9_h5org"]
+
+[sub_resource type="Animation" id="Animation_jxvel"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera3D/WeaponAnimations/WeaponManager:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Camera3D/WeaponAnimations/WeaponManager:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_scy3m"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera3D/WeaponAnimations/WeaponManager:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_2o2ro"]
 resource_name = "walk"
@@ -38,48 +81,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_scy3m"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Camera3D/WeaponAnimations/WeaponManager:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-
-[sub_resource type="Animation" id="Animation_jxvel"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Camera3D/WeaponAnimations/WeaponManager:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Camera3D/WeaponAnimations/WeaponManager:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4axmp"]
@@ -117,6 +118,57 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ocpwa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_miiyo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4g7u"]
+shader = ExtResource("3_hse0x")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.155
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.076
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="Animation" id="Animation_myty3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.143, -0.011, 0.147)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.97055, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_ulu5w"]
 resource_name = "object_reload"
@@ -172,33 +224,6 @@ tracks/1/keys = {
 "values": [Vector3(0, 2.97055, 0), Vector3(-0.139626, 2.97055, 0), Vector3(0, 2.97055, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_myty3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.143, -0.011, 0.147)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 2.97055, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ydh8"]
 _data = {
 "RESET": SubResource("Animation_myty3"),
@@ -231,6 +256,14 @@ mesh = SubResource("CapsuleMesh_ocpwa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_miiyo")
+
+[node name="Shader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_i4g7u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.691887, 0)
