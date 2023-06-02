@@ -1,16 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://bosldx6yxgm4k"]
+[gd_scene load_steps=35 format=3 uid="uid://bosldx6yxgm4k"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_nrmwm"]
-[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_gc143"]
-[ext_resource type="Shader" path="res://Shaders/crtTV.gdshader" id="3_hse0x"]
-[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="3_j03e2"]
-[ext_resource type="Script" path="res://Scripts/WeaponAnimations.gd" id="4_h3kmq"]
-[ext_resource type="Script" path="res://Scripts/WeaponManager.gd" id="5_k7t50"]
-[ext_resource type="PackedScene" uid="uid://lmg2re4eoeo6" path="res://Scenes/M4A1.tscn" id="6_blfox"]
-[ext_resource type="Script" path="res://Scripts/M4A1.gd" id="7_mb7rs"]
-[ext_resource type="PackedScene" path="res://Scenes/UI/sprite_crosshair.tscn" id="8_g4s7h"]
-[ext_resource type="Texture2D" uid="uid://ciqil1tega5qk" path="res://Textures/Objects/Crosshairs/image0000.png" id="9_g50oq"]
-[ext_resource type="PackedScene" uid="uid://dnycm1wwkb6u1" path="res://Scenes/arms.tscn" id="9_h5org"]
+[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_c3g58"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_dc6bp"]
+[ext_resource type="Shader" path="res://Shaders/crtTV.gdshader" id="3_r5ern"]
+[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="4_t3ru5"]
+[ext_resource type="Script" path="res://Scripts/WeaponAnimations.gd" id="5_6nkfa"]
+[ext_resource type="Script" path="res://Scripts/WeaponManager.gd" id="6_7fq28"]
+[ext_resource type="PackedScene" uid="uid://lmg2re4eoeo6" path="res://Scenes/M4A1.tscn" id="7_xt2pd"]
+[ext_resource type="Script" path="res://Scripts/M4A1.gd" id="8_kddk0"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/sprite_crosshair.tscn" id="9_wm28s"]
+[ext_resource type="Texture2D" uid="uid://ciqil1tega5qk" path="res://Textures/Objects/Crosshairs/image0000.png" id="10_txonp"]
+[ext_resource type="PackedScene" uid="uid://dnycm1wwkb6u1" path="res://Scenes/arms.tscn" id="11_mdbq0"]
 
 [sub_resource type="Animation" id="Animation_jxvel"]
 length = 0.001
@@ -83,15 +83,48 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_3c0rp"]
+resource_name = "sprint"
+length = 0.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera3D/WeaponAnimations/WeaponManager:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0649365, 0.130526, 0.2, 0.25011),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.013), Vector3(0, 0, 0), Vector3(0, 0, 0.016), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Camera3D/WeaponAnimations/WeaponManager:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25011),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4axmp"]
 _data = {
 "RESET": SubResource("Animation_jxvel"),
 "idle": SubResource("Animation_scy3m"),
+"sprint": SubResource("Animation_3c0rp"),
 "walk": SubResource("Animation_2o2ro")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p8g0g"]
 animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vguy1"]
+animation = &"sprint"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ojgwo"]
 animation = &"walk"
@@ -104,35 +137,42 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nqsqa"]
 xfade_time = 0.1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c5514"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oebn1"]
+xfade_time = 0.1
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m0q3y"]
 states/End/position = Vector2(896, 100)
 states/Start/position = Vector2(145, 141)
 states/idle/node = SubResource("AnimationNodeAnimation_p8g0g")
 states/idle/position = Vector2(460, 53)
+states/sprint/node = SubResource("AnimationNodeAnimation_vguy1")
+states/sprint/position = Vector2(638, 180)
 states/walk/node = SubResource("AnimationNodeAnimation_ojgwo")
 states/walk/position = Vector2(460, 180)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_4kaat"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_adpu6"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_nqsqa")]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_5r5a8"]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_4kaat"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_adpu6"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_nqsqa"), "walk", "sprint", SubResource("AnimationNodeStateMachineTransition_c5514"), "sprint", "walk", SubResource("AnimationNodeStateMachineTransition_oebn1")]
+graph_offset = Vector2(40, 32)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ocpwa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_miiyo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i4g7u"]
-shader = ExtResource("3_hse0x")
+shader = ExtResource("3_r5ern")
 shader_parameter/overlay = false
 shader_parameter/scanlines_opacity = 0.0
 shader_parameter/scanlines_width = 0.0
 shader_parameter/grille_opacity = 0.0
 shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = true
+shader_parameter/pixelate = false
 shader_parameter/roll = false
-shader_parameter/roll_speed = 8.0
+shader_parameter/roll_speed = 0.0
 shader_parameter/roll_size = 0.0
-shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.05
-shader_parameter/noise_opacity = 0.155
+shader_parameter/roll_variation = 0.1
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.0
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.06
 shader_parameter/aberration = 4.75e-08
@@ -168,6 +208,45 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 2.97055, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a0lki"]
+resource_name = "object_equip"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.143, -0.236, 0.147), Vector3(-0.143, -0.011, 0.147)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.706858, 2.97055, 0), Vector3(0, 2.97055, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_ulu5w"]
@@ -224,21 +303,62 @@ tracks/1/keys = {
 "values": [Vector3(0, 2.97055, 0), Vector3(-0.139626, 2.97055, 0), Vector3(0, 2.97055, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_n635x"]
+resource_name = "object_unequip"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.143, -0.011, 0.147), Vector3(-0.143, -0.236, 0.147)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.97055, 0), Vector3(0.706858, 2.97055, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ydh8"]
 _data = {
 "RESET": SubResource("Animation_myty3"),
+"object_equip": SubResource("Animation_a0lki"),
 "object_reload": SubResource("Animation_ulu5w"),
-"object_shoot": SubResource("Animation_lvf8i")
+"object_shoot": SubResource("Animation_lvf8i"),
+"object_unequip": SubResource("Animation_n635x")
 }
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_nrmwm")
+script = ExtResource("1_c3g58")
 
 [node name="GameManager" type="Node3D" parent="."]
-script = ExtResource("2_gc143")
+script = ExtResource("2_dc6bp")
 
 [node name="WalkAnimationPlayer" type="AnimationPlayer" parent="GameManager"]
-speed_scale = 2.0
+reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_4axmp")
 }
@@ -249,7 +369,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_m0q3y")
 anim_player = NodePath("../WalkAnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_5r5a8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_ocpwa")
@@ -258,6 +377,7 @@ mesh = SubResource("CapsuleMesh_ocpwa")
 shape = SubResource("CapsuleShape3D_miiyo")
 
 [node name="Shader" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_i4g7u")
 anchors_preset = 15
 anchor_right = 1.0
@@ -265,28 +385,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Shader"]
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.691887, 0)
-script = ExtResource("3_j03e2")
+script = ExtResource("4_t3ru5")
 
 [node name="WeaponAnimations" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, -0.223, -0.317)
-script = ExtResource("4_h3kmq")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, -0.223, -0.318709)
+script = ExtResource("5_6nkfa")
 
 [node name="WeaponManager" type="Node3D" parent="Camera3D/WeaponAnimations"]
-script = ExtResource("5_k7t50")
+script = ExtResource("6_7fq28")
 
-[node name="M4A1" parent="Camera3D/WeaponAnimations/WeaponManager" instance=ExtResource("6_blfox")]
+[node name="M4A1" parent="Camera3D/WeaponAnimations/WeaponManager" instance=ExtResource("7_xt2pd")]
 transform = Transform3D(-0.985408, 0, 0.17021, 0, 1, 0, -0.17021, 0, -0.985408, -0.143, -0.011, 0.147)
-script = ExtResource("7_mb7rs")
+script = ExtResource("8_kddk0")
 
 [node name="AnimationPlayer_M4A1" type="AnimationPlayer" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1"]
 libraries = {
 "": SubResource("AnimationLibrary_2ydh8")
 }
 
-[node name="crosshair" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1" instance=ExtResource("8_g4s7h")]
-texture = ExtResource("9_g50oq")
+[node name="crosshair" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1" instance=ExtResource("9_wm28s")]
+texture = ExtResource("10_txonp")
 
-[node name="arms" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1" instance=ExtResource("9_h5org")]
+[node name="arms" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1" instance=ExtResource("11_mdbq0")]
+transform = Transform3D(-8.00819e-09, 0, -0.183206, 0, 0.183206, 0, 0.183206, 0, -8.00819e-09, 0.301, 0.228, -0.563)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1"]
+
+[node name="M4A2" parent="Camera3D/WeaponAnimations/WeaponManager" instance=ExtResource("7_xt2pd")]
+transform = Transform3D(-0.985408, 0, 0.0851049, 0, 1, 0, -0.17021, 0, -0.492704, -0.143, -0.011, 0.147)
+visible = false
+script = ExtResource("8_kddk0")
+
+[node name="AnimationPlayer_M4A1" type="AnimationPlayer" parent="Camera3D/WeaponAnimations/WeaponManager/M4A2"]
+libraries = {
+"": SubResource("AnimationLibrary_2ydh8")
+}
+
+[node name="crosshair" parent="Camera3D/WeaponAnimations/WeaponManager/M4A2" instance=ExtResource("9_wm28s")]
+texture = ExtResource("10_txonp")
+
+[node name="arms" parent="Camera3D/WeaponAnimations/WeaponManager/M4A2" instance=ExtResource("11_mdbq0")]
 transform = Transform3D(-8.00819e-09, 0, -0.183206, 0, 0.183206, 0, 0.183206, 0, -8.00819e-09, 0.301, 0.228, -0.563)

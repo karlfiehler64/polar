@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwvxmvy587hpo"]
+
+[ext_resource type="PackedScene" uid="uid://4a0hs7uc31l5" path="res://Models/Objects/snowcruiser.glb" id="1_euh1n"]
+
+[node name="snowcruiser" instance=ExtResource("1_euh1n")]

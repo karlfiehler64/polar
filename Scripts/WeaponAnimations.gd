@@ -11,6 +11,7 @@ extends Node3D
 
 var max_aim_sway : float = 8
 var max_walk_sway : Vector2 = Vector2(200,200)
+var max_jump_sway : float = 8
 var min_sway_threshold : float = 0
 
 @export var aim_sway_strength : float = 0.0003
@@ -47,7 +48,9 @@ func walk_sway(sway_amount, strength):
 	position.z += sway_amount.y * strength
 	
 func jump_sway(sway_amount, strength):
+	sway_amount = clamp(sway_amount, -max_jump_sway, max_jump_sway)
 	position.y += sway_amount * strength
+	
 	
 func shot_sway(strength):
 	position.x += random.randf_range(-strength, strength)

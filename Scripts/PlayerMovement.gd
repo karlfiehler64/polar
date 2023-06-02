@@ -1,73 +1,69 @@
 extends CharacterBody3D
+class_name MovementController
 
-@onready var game_manager = $GameManager
-@onready var animation_player = game_manager.walk_animation_player
-@onready var animation_tree = game_manager.walk_animation_tree
-@onready var walk_state_machine = animation_tree["parameters/playback"]
-@onready var audiostream_player = $GameManager/AudioStreamPlayer3D
-@onready var weapon_manager = $Camera3D/WeaponAnimations/WeaponManager
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-const air_density : float = 1
+@export var gravity_multiplier := 3.0
+@export var speed := 10
+@export var acceleration := 8
+@export var deceleration := 10
+@export_range(0.0, 1.0, 0.05) var air_control := 0.3
+@export var jump_height := 10
+var direction := Vector3()
+var last_direction := Vector3()
+var input_axis := Vector2()
+# Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
+@onready var gravity: float = (ProjectSettings.get_setting("physics/3d/default_gravity") 
+		* gravity_multiplier)
 
-var minimum_animation_speed_threshold : float = 0.4
 
-var current_direction : Vector3 
-
-var animation_weight : float = 10
-
-var random : RandomNumberGenerator
-
-var audio_pitch_range : float = 0.2
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	random = RandomNumberGenerator.new()
-
-func _physics_process(delta):
-	var smoothed_input = Vector2()
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	# Handle Jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
+# Called every physics tick. 'delta' is constant
+func _physics_process(delta: float) -> void:
+	input_axis = Input.get_vector("down", "up",
+			"left", "right")
+	
+	direction_input()
+	
 	if is_on_floor():
-		var input_dir = Input.get_vector("left", "right", "up", "down")
-		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		current_direction = direction
-		if direction:
-			velocity.x = direction.x * SPEED
-			velocity.z = direction.z * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.z = move_toward(velocity.z, 0, SPEED)
-		
-		if velocity.length() > minimum_animation_speed_threshold and !weapon_manager.is_reloading:
-			walk_state_machine.travel("walk")
-			audiostream_player.pitch_scale = random.randf_range(1 - audio_pitch_range, audio_pitch_range)
-		else:
-			walk_state_machine.travel("idle")
-		
-		
-	elif current_direction:
-		velocity.x = current_direction.x * SPEED
-		velocity.z = current_direction.z * SPEED
-
+		if Input.is_action_just_pressed("jump"):
+			velocity.y = jump_height
+	else:
+		velocity.y -= gravity * delta
+	
+	accelerate(delta)
+	
 	move_and_slide()
-	
-	
-	#divide velocity magnitude by max speed so the value is between 0 and 1 for blendtree
-	var walk_vector = velocity.length() / SPEED
-	
-		
-func _process(delta):
-	if Input.is_action_pressed("exit"):
-			get_tree().quit()
 
+
+func direction_input() -> void:
+	direction = Vector3()
+	var aim: Basis = get_global_transform().basis
+	direction = aim.z * -input_axis.x + aim.x * input_axis.y
+	if direction.length() > 0:
+		last_direction = direction
+
+
+func accelerate(delta: float) -> void:
+	# Using only the horizontal velocity, interpolate towards the input.
+	var temp_vel := velocity
+	temp_vel.y = 0
+	
+	var target: Vector3
+	
+	var temp_accel: float
+	if is_on_floor():
+		target = direction * speed
+	else:
+		target = last_direction * speed
+	
+	if direction.dot(temp_vel) > 0:
+		temp_accel = acceleration
+	else:
+		temp_accel = deceleration
+	
+	if not is_on_floor():
+		temp_accel *= air_control
+	
+	temp_vel = temp_vel.lerp(target, temp_accel * delta)
+	
+	velocity.x = temp_vel.x
+	velocity.z = temp_vel.z

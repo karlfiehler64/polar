@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dqqxv2tbiw20e"]
 
-[ext_resource type="PackedScene" uid="uid://bosldx6yxgm4k" path="res://Scenes/player_revised.tscn" id="2_dbcwe"]
-[ext_resource type="PackedScene" path="res://Models/World/playground_model.tscn" id="2_th5vg"]
+[ext_resource type="PackedScene" path="res://Models/World/playground_model.tscn" id="1_57hbs"]
+[ext_resource type="PackedScene" uid="uid://bosldx6yxgm4k" path="res://Scenes/player_revised.tscn" id="2_yux46"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_f5vlq"]
 
@@ -31,7 +31,7 @@ environment = SubResource("Environment_d7h4q")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Playground" parent="." instance=ExtResource("2_th5vg")]
+[node name="Playground" parent="." instance=ExtResource("1_57hbs")]
 
-[node name="Player" parent="." instance=ExtResource("2_dbcwe")]
+[node name="Player" parent="." instance=ExtResource("2_yux46")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0647154, 3.48936, 0.709344)
