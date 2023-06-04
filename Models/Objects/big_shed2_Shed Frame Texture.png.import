@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwonxbmon0oua"
-path.s3tc="res://.godot/imported/polar_island_images.png-c32b48fd6ba383143027a1da353079e2.s3tc.ctex"
+uid="uid://ccvtjb8c6bc5m"
+path.s3tc="res://.godot/imported/big_shed2_Shed Frame Texture.png-9fe4ed93cd3fee53f36070d45693c5c8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Models/World/polar_island_images.png"
-dest_files=["res://.godot/imported/polar_island_images.png-c32b48fd6ba383143027a1da353079e2.s3tc.ctex"]
+source_file="res://Models/Objects/big_shed2_Shed Frame Texture.png"
+dest_files=["res://.godot/imported/big_shed2_Shed Frame Texture.png-9fe4ed93cd3fee53f36070d45693c5c8.s3tc.ctex"]
 
 [params]
 

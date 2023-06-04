@@ -20,7 +20,6 @@ func _ready():
 	current_weapon = weapons[current_weapon_index]
 	is_reloading = current_weapon.is_reloading
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	is_reloading = current_weapon.is_reloading

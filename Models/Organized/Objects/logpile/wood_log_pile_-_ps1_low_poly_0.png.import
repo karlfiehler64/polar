@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5owrwkkudb06"
-path.s3tc="res://.godot/imported/polar_island_Stone_07-128x128.png-02a1fd52fd07673f6bc0a6a64042930e.s3tc.ctex"
+uid="uid://c3gqqdd0nwnb6"
+path.s3tc="res://.godot/imported/wood_log_pile_-_ps1_low_poly_0.png-a7df36adf3e06a8b98d89d0c93ac150b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Models/World/polar_island_Stone_07-128x128.png"
-dest_files=["res://.godot/imported/polar_island_Stone_07-128x128.png-02a1fd52fd07673f6bc0a6a64042930e.s3tc.ctex"]
+source_file="res://Models/Organized/Objects/logpile/wood_log_pile_-_ps1_low_poly_0.png"
+dest_files=["res://.godot/imported/wood_log_pile_-_ps1_low_poly_0.png-a7df36adf3e06a8b98d89d0c93ac150b.s3tc.ctex"]
 
 [params]
 

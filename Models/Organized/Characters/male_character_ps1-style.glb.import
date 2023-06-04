@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbeysq8qnwi4h"
-path="res://.godot/imported/polar_island.glb-af13f0d290d0f477fa5e3363795eb158.scn"
+uid="uid://c1s2muy4lc1t8"
+path="res://.godot/imported/male_character_ps1-style.glb-fe1aa18fc2a699d668427bee02221137.scn"
 
 [deps]
 
-source_file="res://Models/World/polar_island.glb"
-dest_files=["res://.godot/imported/polar_island.glb-af13f0d290d0f477fa5e3363795eb158.scn"]
+source_file="res://Models/Organized/Characters/male_character_ps1-style.glb"
+dest_files=["res://.godot/imported/male_character_ps1-style.glb-fe1aa18fc2a699d668427bee02221137.scn"]
 
 [params]
 

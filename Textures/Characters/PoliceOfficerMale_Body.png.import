@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5owrwkkudb06"
-path.s3tc="res://.godot/imported/polar_island_Stone_07-128x128.png-02a1fd52fd07673f6bc0a6a64042930e.s3tc.ctex"
+uid="uid://d1nq423av1uu2"
+path.s3tc="res://.godot/imported/PoliceOfficerMale_Body.png-a3248a95ad81f59d055946ee5aaefe7d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://Models/World/polar_island_Stone_07-128x128.png"
-dest_files=["res://.godot/imported/polar_island_Stone_07-128x128.png-02a1fd52fd07673f6bc0a6a64042930e.s3tc.ctex"]
+source_file="res://Textures/Characters/PoliceOfficerMale_Body.png"
+dest_files=["res://.godot/imported/PoliceOfficerMale_Body.png-a3248a95ad81f59d055946ee5aaefe7d.s3tc.ctex"]
 
 [params]
 

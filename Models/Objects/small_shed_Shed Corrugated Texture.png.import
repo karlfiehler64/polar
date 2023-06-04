@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5owrwkkudb06"
-path.s3tc="res://.godot/imported/polar_island_Stone_07-128x128.png-02a1fd52fd07673f6bc0a6a64042930e.s3tc.ctex"
+uid="uid://t2srdhskt4ya"
+path.s3tc="res://.godot/imported/small_shed_Shed Corrugated Texture.png-c5fd88a061c0ab7af4f304c3a47ca176.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Models/World/polar_island_Stone_07-128x128.png"
-dest_files=["res://.godot/imported/polar_island_Stone_07-128x128.png-02a1fd52fd07673f6bc0a6a64042930e.s3tc.ctex"]
+source_file="res://Models/Objects/small_shed_Shed Corrugated Texture.png"
+dest_files=["res://.godot/imported/small_shed_Shed Corrugated Texture.png-c5fd88a061c0ab7af4f304c3a47ca176.s3tc.ctex"]
 
 [params]
 
