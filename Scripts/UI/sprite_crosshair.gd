@@ -4,7 +4,7 @@ var default_scale : Vector2
 var crosshair_speed : float = 10
 
 var max_crosshair_scale : float = 4
-var crosshair_scale_strength : float = 40
+var crosshair_scale_strength : float = 120
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

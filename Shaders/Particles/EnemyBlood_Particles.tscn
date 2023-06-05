@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://jqiqg1gdrxyp"]
+
+[ext_resource type="Texture2D" uid="uid://56g3wgda7ac0" path="res://Textures/Particles/spritesheet (1).png" id="1_6kmoy"]
+[ext_resource type="Script" path="res://Shaders/Particles/EnemyBlood_Particles.gd" id="2_3d2dq"]
+
+[sub_resource type="Curve" id="Curve_mv3ur"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q0yf3"]
+curve = SubResource("Curve_mv3ur")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sdfkc"]
+initial_velocity_min = 8.0
+initial_velocity_max = 10.0
+angle_min = -45.0
+angle_max = 45.0
+scale_min = 0.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_q0yf3")
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybrke"]
+transparency = 1
+albedo_texture = ExtResource("1_6kmoy")
+uv1_scale = Vector3(0.218, 0.791, 0.782)
+uv1_offset = Vector3(0.262, 0.197, 0)
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_88hic"]
+material = SubResource("StandardMaterial3D_ybrke")
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+transparency = 0.42
+amount = 9
+lifetime = 0.5
+explosiveness = 0.96
+fixed_fps = 144
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_sdfkc")
+draw_pass_1 = SubResource("QuadMesh_88hic")
+script = ExtResource("2_3d2dq")

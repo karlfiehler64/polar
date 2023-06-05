@@ -4,7 +4,7 @@ extends Node3D
 @onready var animation_player = $AnimationPlayer_M4A1
 @onready var audiostream_player = $test
 
-@onready var weapon_placeholder = $"../.."
+@onready var weapon_animations = $"../.."
 @onready var camera = player_manager.current_camera
 @onready var crosshair = $crosshair
 @onready var raycast = $"../../../RayCast3D"
@@ -24,7 +24,7 @@ var range : float = 100
 var can_shoot : bool = true
 var is_reloading : bool = false
 var rpm : int = 800
-var spray_strength : float = 0.025
+var spray_strength : float = 10
 var equip_time : float = 1
 var is_equipped : bool = true
 
@@ -55,8 +55,7 @@ func _process(delta):
 		audiostream_player.stream = shoot_sound
 		audiostream_player.play()
 		animation_player.play("object_shoot")
-		camera.camera_shake(0.01, 0.01)
-		weapon_placeholder.shot_sway(spray_strength)
+		camera.camera_shake(delta)
 		current_ammo -= 1
 		shot_timer.start()
 		can_shoot = false
@@ -65,6 +64,8 @@ func _process(delta):
 			var collider = raycast.get_collider()
 			if collider.is_in_group("enemy"):
 				collider.hit(damage)
+				print(collider.global_transform.origin)
+				player_manager.enemy_hit(collider)
 				
 
 	if Input.is_action_pressed("action") and current_ammo <= 0:

@@ -14,7 +14,7 @@ resource_name = "Limiter"
 resource_name = "HighPassFilter"
 
 [resource]
-bus/0/volume_db = -10.0692
+bus/0/volume_db = -36.0328
 bus/0/effect/0/effect = SubResource("AudioEffectReverb_njj1b")
 bus/0/effect/0/enabled = false
 bus/0/effect/1/effect = SubResource("AudioEffectLimiter_q2p77")

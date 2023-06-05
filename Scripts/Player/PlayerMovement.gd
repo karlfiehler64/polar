@@ -37,6 +37,9 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_height
+			
+			if input_axis == Vector2.ZERO:
+				last_direction = Vector3.ZERO
 		
 		if Input.is_action_pressed("sprint") and !is_crouching:
 			current_speed = sprint_speed
@@ -55,6 +58,7 @@ func direction_input() -> void:
 	direction = aim.z * -input_axis.x + aim.x * input_axis.y
 	if direction.length() > 0:
 		last_direction = direction
+	
 
 
 func accelerate(delta: float) -> void:

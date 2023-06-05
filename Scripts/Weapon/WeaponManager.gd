@@ -1,7 +1,7 @@
 extends Node3D
 
+@onready var current_weapon = $M4A1
 
-var current_weapon : Node3D 
 var is_reloading : bool
 
 @onready var M4A1 = $M4A1

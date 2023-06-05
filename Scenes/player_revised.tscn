@@ -1,19 +1,22 @@
-[gd_scene load_steps=41 format=3 uid="uid://b734uox3u2kg6"]
+[gd_scene load_steps=45 format=3 uid="uid://61rahwv3hwf8"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="1_pdl7g"]
-[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="2_28lcf"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerMovement.gd" id="1_m5kl4"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerManager.gd" id="2_g4m30"]
 [ext_resource type="Shader" path="res://Shaders/crtTV.gdshader" id="3_86tp1"]
-[ext_resource type="Script" path="res://Scripts/CameraMovement.gd" id="4_b4u2q"]
-[ext_resource type="Script" path="res://Scripts/WeaponAnimations.gd" id="5_omlfd"]
-[ext_resource type="Script" path="res://Scripts/WeaponManager.gd" id="6_0apd5"]
+[ext_resource type="Script" path="res://Scripts/Player/CameraMovement.gd" id="3_pgdnv"]
+[ext_resource type="Script" path="res://Scenes/RayCastManager.gd" id="4_ye4qs"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponAnimations.gd" id="5_odoxs"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponManager.gd" id="6_pkqn8"]
 [ext_resource type="PackedScene" uid="uid://lmg2re4eoeo6" path="res://Scenes/M4A1.tscn" id="7_tsojt"]
-[ext_resource type="Script" path="res://Scripts/M4A1.gd" id="8_3huhs"]
+[ext_resource type="Script" path="res://Scripts/Weapon/M4A1.gd" id="8_1txpt"]
 [ext_resource type="PackedScene" path="res://Scenes/UI/sprite_crosshair.tscn" id="9_tiaf3"]
 [ext_resource type="Texture2D" uid="uid://ciqil1tega5qk" path="res://Textures/Objects/Crosshairs/image0000.png" id="10_qa1wg"]
 [ext_resource type="AudioStream" uid="uid://bxbnkawolbwpi" path="res://SoundEffects/M4A1/reload.wav" id="10_ta3kv"]
 [ext_resource type="AudioStream" uid="uid://h5oql8yn4uyw" path="res://SoundEffects/M4A1/outofammo.wav" id="11_7a053"]
 [ext_resource type="PackedScene" uid="uid://dnycm1wwkb6u1" path="res://Scenes/arms.tscn" id="11_bobw7"]
 [ext_resource type="AudioStream" uid="uid://ie4pjudwi14p" path="res://SoundEffects/M4A1/minigun.wav" id="12_58g60"]
+[ext_resource type="FontFile" uid="uid://kcwtysstfo4" path="res://Fonts/trebuc.ttf" id="15_tm7iu"]
+[ext_resource type="Script" path="res://Scripts/UI/FPS_counter.gd" id="16_gp3ui"]
 
 [sub_resource type="Animation" id="Animation_jxvel"]
 length = 0.001
@@ -284,30 +287,6 @@ height = 2.26
 radius = 0.4
 height = 2.26
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4g7u"]
-shader = ExtResource("3_86tp1")
-shader_parameter/overlay = false
-shader_parameter/scanlines_opacity = 0.0
-shader_parameter/scanlines_width = 0.0
-shader_parameter/grille_opacity = 0.0
-shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = false
-shader_parameter/roll = false
-shader_parameter/roll_speed = 0.0
-shader_parameter/roll_size = 0.0
-shader_parameter/roll_variation = 0.1
-shader_parameter/distort_intensity = 0.0
-shader_parameter/noise_opacity = 0.0
-shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.06
-shader_parameter/aberration = 4.75e-08
-shader_parameter/brightness = 1.076
-shader_parameter/discolor = true
-shader_parameter/warp_amount = 1.0
-shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.5
-
 [sub_resource type="Animation" id="Animation_myty3"]
 length = 0.001
 tracks/0/type = "value"
@@ -476,11 +455,41 @@ _data = {
 "object_unequip": SubResource("Animation_n635x")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_xyaew"]
+font = ExtResource("15_tm7iu")
+font_size = 20
+font_color = Color(1, 0.996078, 0.988235, 1)
+shadow_size = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4g7u"]
+shader = ExtResource("3_86tp1")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 0.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.1
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.076
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
-script = ExtResource("1_pdl7g")
+script = ExtResource("1_m5kl4")
 
 [node name="PlayerManager" type="Node3D" parent="."]
-script = ExtResource("2_28lcf")
+script = ExtResource("2_g4m30")
 
 [node name="WalkAnimationPlayer" type="AnimationPlayer" parent="PlayerManager"]
 reset_on_save = false
@@ -508,31 +517,25 @@ mesh = SubResource("CapsuleMesh_ocpwa")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_miiyo")
 
-[node name="Shader" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_i4g7u")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Shader"]
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.953946, 0)
-script = ExtResource("4_b4u2q")
+script = ExtResource("3_pgdnv")
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0155038, 0)
+target_position = Vector3(0, 0, -10)
+script = ExtResource("4_ye4qs")
 
 [node name="WeaponAnimations" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, -0.223, -0.318709)
-script = ExtResource("5_omlfd")
+script = ExtResource("5_odoxs")
 
 [node name="WeaponManager" type="Node3D" parent="Camera3D/WeaponAnimations"]
-script = ExtResource("6_0apd5")
+script = ExtResource("6_pkqn8")
 
 [node name="M4A1" parent="Camera3D/WeaponAnimations/WeaponManager" instance=ExtResource("7_tsojt")]
 transform = Transform3D(-0.985408, 0, 0.17021, 0, 1, 0, -0.17021, 0, -0.985408, -0.143, -0.011, 0.147)
-script = ExtResource("8_3huhs")
+script = ExtResource("8_1txpt")
 shoot_sound = ExtResource("12_58g60")
 reload_sound = ExtResource("10_ta3kv")
 out_of_ammo_sound = ExtResource("11_7a053")
@@ -568,6 +571,26 @@ texture = ExtResource("10_qa1wg")
 [node name="arms" parent="Camera3D/WeaponAnimations/WeaponManager/M4A2" instance=ExtResource("11_bobw7")]
 transform = Transform3D(-8.00819e-09, 0, -0.183206, 0, 0.183206, 0, 0.183206, 0, -8.00819e-09, 0.301, 0.228, -0.563)
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0155038, 0)
-target_position = Vector3(0, 0, -10)
+[node name="UI" type="Node3D" parent="."]
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 7.0
+offset_top = 567.0
+offset_right = 47.0
+offset_bottom = 591.0
+text = "FPS: "
+label_settings = SubResource("LabelSettings_xyaew")
+uppercase = true
+script = ExtResource("16_gp3ui")
+
+[node name="Shader" type="ColorRect" parent="UI"]
+visible = false
+material = SubResource("ShaderMaterial_i4g7u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI/Shader"]
+visible = false
