@@ -3,7 +3,7 @@ extends Node3D
 @onready var player = $"../.."
 @onready var player_manager = $"../../PlayerManager"
 
-@onready var player_object = $WeaponManager/M4A1
+@onready var player_object = $WeaponManager.current_weapon
 
 @onready var default_position : Vector3 = position
 @onready var default_angle : Vector3 = rotation

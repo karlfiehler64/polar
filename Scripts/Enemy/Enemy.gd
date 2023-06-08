@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var navigation_agent = $NavigationAgent3D
 @onready var player = get_tree().get_nodes_in_group("player")[0]
 
-var speed : float = 2000
+var speed : float = 100
 var hp : float = 100
 
 func _ready():
@@ -16,7 +16,7 @@ func _process(delta):
 	var next_location = navigation_agent.get_next_path_position()
 	var new_direction = (next_location - current_location).normalized() * speed * delta
 	
-	look_at(player.global_transform.origin)
+	look_at(lerp(global_transform.origin, player.global_transform.origin, 0.005 * delta))
 	velocity = velocity.move_toward(new_direction, 1)
 	move_and_slide()
 	

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cix7r0gc78u54" path="res://Scenes/World/polar_island_model.tscn" id="1_u5u06"]
 [ext_resource type="Shader" path="res://Shaders/SimpleWaterShader.gdshader" id="2_htxhr"]
 [ext_resource type="Texture2D" uid="uid://c6018bw0b4li4" path="res://Textures/World/Elements_09-128x128.png" id="3_ui7g0"]
-[ext_resource type="PackedScene" uid="uid://61rahwv3hwf8" path="res://Scenes/player_revised.tscn" id="4_imsku"]
+[ext_resource type="PackedScene" uid="uid://m411y8cvq6c2" path="res://Scenes/player_revised.tscn" id="4_imsku"]
 [ext_resource type="PackedScene" uid="uid://bl6j8xg1wt0ox" path="res://Scenes/Objects/crate_model.tscn" id="5_iuect"]
 [ext_resource type="PackedScene" uid="uid://cs1tqy2vt5fiy" path="res://Scenes/Objects/barrel_model.tscn" id="6_xed6g"]
 [ext_resource type="PackedScene" uid="uid://btv02n3pywa3s" path="res://Models/Objects/pallet.glb" id="7_0gun4"]
@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dlsoa1ak6mie7" path="res://Scenes/Objects/big_shed_2_model.tscn" id="9_52i3t"]
 [ext_resource type="PackedScene" uid="uid://ctvogkrn2ifb0" path="res://Scenes/Objects/small_shed_model.tscn" id="10_kxjxu"]
 [ext_resource type="PackedScene" uid="uid://jjywar750ge7" path="res://Models/Organized/Objects/logpile/wood_log_pile_-_ps1_low_poly.glb" id="11_t2i3f"]
-[ext_resource type="PackedScene" uid="uid://bik4bo02oc2t8" path="res://Scenes/Characters/enemy.tscn" id="12_jur75"]
 [ext_resource type="Script" path="res://Scenes/World/NuclearBombAnimation.gd" id="13_w64uv"]
+[ext_resource type="PackedScene" uid="uid://eyfrv8x6g83a" path="res://Scenes/Characters/chicken.tscn" id="14_mc06c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yiwiu"]
 render_priority = 0
@@ -97,25 +97,13 @@ transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 14.111, -14.9419, 0)
 mesh = SubResource("PlaneMesh_nid1o")
 
 [node name="Player" parent="." instance=ExtResource("4_imsku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.797, -11.103, 0.208035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.797, -2.48341, 12.9178)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_px7cr")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 visible = false
-
-[node name="Enemy" parent="." instance=ExtResource("12_jur75")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.47165, -11.2233, 3.97219)
-
-[node name="Enemy2" parent="." instance=ExtResource("12_jur75")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.83079, -11.2233, 3.97219)
-
-[node name="Enemy3" parent="." instance=ExtResource("12_jur75")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45167, -11.2233, 16.7045)
-
-[node name="Enemy4" parent="." instance=ExtResource("12_jur75")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03339, -11.2233, -4.86238)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_0oh7r")
@@ -222,3 +210,22 @@ libraries = {
 "": SubResource("AnimationLibrary_vyggr")
 }
 script = ExtResource("13_w64uv")
+
+[node name="EnemyManager" type="Node3D" parent="."]
+
+[node name="NPCManager" type="Node3D" parent="."]
+
+[node name="Chiken" parent="NPCManager" instance=ExtResource("14_mc06c")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 5.38108, -13.2233, -15.5227)
+
+[node name="Chiken2" parent="NPCManager" instance=ExtResource("14_mc06c")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.991148, -13.2233, -15.5227)
+
+[node name="Chiken3" parent="NPCManager" instance=ExtResource("14_mc06c")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 5.38108, -13.2233, -8.28946)
+
+[node name="Chiken4" parent="NPCManager" instance=ExtResource("14_mc06c")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 3.00278, -13.2233, -11.5963)
+
+[node name="Chiken5" parent="NPCManager" instance=ExtResource("14_mc06c")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 5.38108, -13.2233, -13.2086)

@@ -1,16 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bik4bo02oc2t8"]
+[gd_scene load_steps=7 format=3 uid="uid://bik4bo02oc2t8"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Enemy.gd" id="1_p0ro7"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_da4dh"]
+albedo_color = Color(0.396078, 1, 0.541176, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jwnxd"]
+material = SubResource("StandardMaterial3D_da4dh")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j54ur"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipm7x"]
-albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hv0cl"]
 material = SubResource("StandardMaterial3D_ipm7x")
+size = Vector3(1, 1.583, 1)
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_p0ro7")

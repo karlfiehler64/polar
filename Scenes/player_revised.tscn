@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://61rahwv3hwf8"]
+[gd_scene load_steps=59 format=3 uid="uid://m411y8cvq6c2"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerMovement.gd" id="1_m5kl4"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerManager.gd" id="2_g4m30"]
@@ -9,14 +9,25 @@
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponManager.gd" id="6_pkqn8"]
 [ext_resource type="PackedScene" uid="uid://lmg2re4eoeo6" path="res://Scenes/M4A1.tscn" id="7_tsojt"]
 [ext_resource type="Script" path="res://Scripts/Weapon/M4A1.gd" id="8_1txpt"]
+[ext_resource type="AudioStream" uid="uid://bmwcyorb11mjq" path="res://SoundEffects/M4A1/minigun.mp3" id="9_j426f"]
 [ext_resource type="PackedScene" path="res://Scenes/UI/sprite_crosshair.tscn" id="9_tiaf3"]
+[ext_resource type="AudioStream" uid="uid://bfcav3y3xfuw8" path="res://SoundEffects/M4A1/reload.mp3" id="10_8wrsb"]
 [ext_resource type="Texture2D" uid="uid://ciqil1tega5qk" path="res://Textures/Objects/Crosshairs/image0000.png" id="10_qa1wg"]
-[ext_resource type="AudioStream" uid="uid://bxbnkawolbwpi" path="res://SoundEffects/M4A1/reload.wav" id="10_ta3kv"]
-[ext_resource type="AudioStream" uid="uid://h5oql8yn4uyw" path="res://SoundEffects/M4A1/outofammo.wav" id="11_7a053"]
 [ext_resource type="PackedScene" uid="uid://dnycm1wwkb6u1" path="res://Scenes/arms.tscn" id="11_bobw7"]
+[ext_resource type="AudioStream" uid="uid://b5dfvtq078ysd" path="res://SoundEffects/M4A1/outofammo.mp3" id="11_bp3cs"]
 [ext_resource type="AudioStream" uid="uid://ie4pjudwi14p" path="res://SoundEffects/M4A1/minigun.wav" id="12_58g60"]
+[ext_resource type="PackedScene" uid="uid://dvoenr03os4x1" path="res://Scenes/Objects/Weapons/ak_model.tscn" id="15_pt80m"]
 [ext_resource type="FontFile" uid="uid://kcwtysstfo4" path="res://Fonts/trebuc.ttf" id="15_tm7iu"]
-[ext_resource type="Script" path="res://Scripts/UI/FPS_counter.gd" id="16_gp3ui"]
+[ext_resource type="Script" path="res://Scripts/UI/FPS_Counter.gd" id="16_4dp0m"]
+[ext_resource type="Texture2D" uid="uid://bq8pt4nsdm6tj" path="res://Textures/UI/RIFFLE-CROSSHAIR_ICON_POLAR.png" id="16_vej4g"]
+[ext_resource type="Script" path="res://Scripts/UI/UIManager.gd" id="17_28ejv"]
+[ext_resource type="Script" path="res://Scripts/Weapon/AK47_Class_test.gd" id="17_roual"]
+[ext_resource type="Texture2D" uid="uid://chkvsirt6og6a" path="res://Textures/UI/HEART_HEALTH_POLAR.png" id="19_vhfdq"]
+[ext_resource type="Shader" path="res://Shaders/UIColor.gdshader" id="20_o6tpc"]
+[ext_resource type="Texture2D" uid="uid://cg5v44g7ny63e" path="res://Textures/UI/RIFFLE-AMMO_ICON_POLAR.png" id="20_vweys"]
+[ext_resource type="Texture2D" uid="uid://b0mkfu2aggmdw" path="res://Textures/UI/infinite_icon.png" id="21_asrgm"]
+[ext_resource type="Texture2D" uid="uid://4d7c5hooly5d" path="res://Textures/UI/AMMO-DIVIDER-LINE_ICON_POLAR.png" id="23_qkcj6"]
+[ext_resource type="FontFile" uid="uid://cwvblw43cthkk" path="res://Fonts/planetjoust.ttf" id="24_urkfe"]
 
 [sub_resource type="Animation" id="Animation_jxvel"]
 length = 0.001
@@ -287,7 +298,7 @@ height = 2.26
 radius = 0.4
 height = 2.26
 
-[sub_resource type="Animation" id="Animation_myty3"]
+[sub_resource type="Animation" id="Animation_pbccg"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -299,7 +310,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.143, -0.011, 0.147)]
+"values": [Vector3(-0.144, -0.004, 0.142)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -311,10 +322,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 2.97055, 0)]
+"values": [Vector3(0, 2.96706, -0.0890118)]
 }
 
-[sub_resource type="Animation" id="Animation_a0lki"]
+[sub_resource type="Animation" id="Animation_c7c8m"]
 resource_name = "object_equip"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -326,7 +337,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.143, -0.236, 0.147), Vector3(-0.143, -0.011, 0.147)]
+"values": [Vector3(-0.144, -0.173, 0.142), Vector3(-0.144, -0.004, 0.142)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -338,22 +349,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.706858, 2.97055, 0), Vector3(0, 2.97055, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:process_mode")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
+"values": [Vector3(0.893609, 2.96706, -0.0890118), Vector3(0, 2.96706, -0.0890118)]
 }
 
-[sub_resource type="Animation" id="Animation_ulu5w"]
+[sub_resource type="Animation" id="Animation_17vax"]
 resource_name = "object_reload"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -362,10 +361,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.946983),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.143, -0.011, 0.163), Vector3(-0.143, -0.145, 0.21), Vector3(-0.143, -0.011, 0.163)]
+"values": [Vector3(-0.144, -0.004, 0.142), Vector3(-0.144, -0.192, 0.142), Vector3(-0.144, -0.004, 0.142)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -374,13 +373,13 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.946983),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.0698132, 2.97055, 0), Vector3(1.00007, 2.97055, 0), Vector3(-0.0698132, 2.97055, 0)]
+"values": [Vector3(0, 2.96706, -0.0890118), Vector3(0.909316, 2.96706, -0.0890118), Vector3(0, 2.96706, -0.0890118)]
 }
 
-[sub_resource type="Animation" id="Animation_lvf8i"]
+[sub_resource type="Animation" id="Animation_x47xa"]
 resource_name = "object_shoot"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -389,10 +388,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.9),
+"times": PackedFloat32Array(0, 0.2, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.143, -0.011, 0.147), Vector3(-0.143, -0.011, 0.179), Vector3(-0.143, -0.011, 0.147)]
+"values": [Vector3(-0.144, -0.004, 0.142), Vector3(-0.144, -0.004, 0.178), Vector3(-0.144, -0.004, 0.142)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -401,13 +400,13 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.9),
+"times": PackedFloat32Array(0, 0.2, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 2.97055, 0), Vector3(-0.139626, 2.97055, 0), Vector3(0, 2.97055, 0)]
+"values": [Vector3(0, 2.96706, -0.0890118), Vector3(-0.123918, 2.96706, -0.0890118), Vector3(0, 2.96706, -0.0890118)]
 }
 
-[sub_resource type="Animation" id="Animation_n635x"]
+[sub_resource type="Animation" id="Animation_xb1do"]
 resource_name = "object_unequip"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -416,10 +415,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.143, -0.011, 0.147), Vector3(-0.143, -0.236, 0.147)]
+"values": [Vector3(-0.144, -0.004, 0.142), Vector3(-0.144, -0.173, 0.142)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -428,38 +427,38 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.9),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 2.97055, 0), Vector3(0.706858, 2.97055, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:process_mode")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.9),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
+"values": [Vector3(0, 2.96706, -0.0890118), Vector3(0.893609, 2.96706, -0.0890118)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ydh8"]
 _data = {
-"RESET": SubResource("Animation_myty3"),
-"object_equip": SubResource("Animation_a0lki"),
-"object_reload": SubResource("Animation_ulu5w"),
-"object_shoot": SubResource("Animation_lvf8i"),
-"object_unequip": SubResource("Animation_n635x")
+"RESET": SubResource("Animation_pbccg"),
+"object_equip": SubResource("Animation_c7c8m"),
+"object_reload": SubResource("Animation_17vax"),
+"object_shoot": SubResource("Animation_x47xa"),
+"object_unequip": SubResource("Animation_xb1do")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7nrl"]
+shader = ExtResource("20_o6tpc")
+shader_parameter/new_color = Color(0.854902, 0.854902, 0.854902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vi3b1"]
+shader = ExtResource("20_o6tpc")
+shader_parameter/new_color = Color(0.854902, 0.854902, 0.854902, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xyaew"]
 font = ExtResource("15_tm7iu")
 font_size = 20
 font_color = Color(1, 0.996078, 0.988235, 1)
 shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_lw566"]
+font = ExtResource("24_urkfe")
+font_size = 31
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i4g7u"]
 shader = ExtResource("3_86tp1")
@@ -534,54 +533,126 @@ script = ExtResource("5_odoxs")
 script = ExtResource("6_pkqn8")
 
 [node name="M4A1" parent="Camera3D/WeaponAnimations/WeaponManager" instance=ExtResource("7_tsojt")]
-transform = Transform3D(-0.985408, 0, 0.17021, 0, 1, 0, -0.17021, 0, -0.985408, -0.143, -0.011, 0.147)
+process_mode = 4
+transform = Transform3D(-0.980909, -0.0875438, 0.173648, -0.0888943, 0.996041, 0, -0.17296, -0.0154363, -0.984808, -0.144, -0.004, 0.142)
+visible = false
 script = ExtResource("8_1txpt")
-shoot_sound = ExtResource("12_58g60")
-reload_sound = ExtResource("10_ta3kv")
-out_of_ammo_sound = ExtResource("11_7a053")
+shoot_sound = ExtResource("9_j426f")
+reload_sound = ExtResource("10_8wrsb")
+out_of_ammo_sound = ExtResource("11_bp3cs")
 
 [node name="AnimationPlayer_M4A1" type="AnimationPlayer" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1"]
+process_mode = 4
 libraries = {
 "": SubResource("AnimationLibrary_2ydh8")
 }
 
 [node name="crosshair" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1" instance=ExtResource("9_tiaf3")]
+process_mode = 4
+visible = false
 texture = ExtResource("10_qa1wg")
 
 [node name="arms" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1" instance=ExtResource("11_bobw7")]
+process_mode = 4
 transform = Transform3D(-8.00819e-09, 0, -0.183206, 0, 0.183206, 0, 0.183206, 0, -8.00819e-09, 0.301, 0.228, -0.563)
+visible = false
 
-[node name="test" type="AudioStreamPlayer3D" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1"]
+[node name="AudioStreamPlayer_M4A1" type="AudioStreamPlayer3D" parent="Camera3D/WeaponAnimations/WeaponManager/M4A1"]
+process_mode = 4
+visible = false
 stream = ExtResource("12_58g60")
 bus = &"Shoot"
 
-[node name="M4A2" parent="Camera3D/WeaponAnimations/WeaponManager" instance=ExtResource("7_tsojt")]
-transform = Transform3D(-0.985408, 0, 0.0851049, 0, 1, 0, -0.17021, 0, -0.492704, -0.143, -0.011, 0.147)
-visible = false
+[node name="AK47" parent="Camera3D/WeaponAnimations/WeaponManager" node_paths=PackedStringArray("player_manager", "animation_player", "audiostream_player", "weapon_animations", "crosshair") instance=ExtResource("15_pt80m")]
+transform = Transform3D(-0.324681, -0.028977, 0.0574774, -0.029424, 0.32969, 0, -0.0572499, -0.00510942, -0.325971, -0.144, -0.004, 0.142)
+script = ExtResource("17_roual")
+player_manager = NodePath("../../../../PlayerManager")
+animation_player = NodePath("AnimationPlayer_AK47")
+audiostream_player = NodePath("AudioStreamPlayer_AK47")
+weapon_animations = NodePath("../..")
+crosshair = NodePath("crosshair")
+shoot_sound = ExtResource("9_j426f")
+reload_sound = ExtResource("10_8wrsb")
+out_of_ammo_sound = ExtResource("11_bp3cs")
 
-[node name="AnimationPlayer_M4A1" type="AnimationPlayer" parent="Camera3D/WeaponAnimations/WeaponManager/M4A2"]
+[node name="AnimationPlayer_AK47" type="AnimationPlayer" parent="Camera3D/WeaponAnimations/WeaponManager/AK47"]
 libraries = {
 "": SubResource("AnimationLibrary_2ydh8")
 }
 
-[node name="crosshair" parent="Camera3D/WeaponAnimations/WeaponManager/M4A2" instance=ExtResource("9_tiaf3")]
-visible = false
-texture = ExtResource("10_qa1wg")
+[node name="crosshair" parent="Camera3D/WeaponAnimations/WeaponManager/AK47" instance=ExtResource("9_tiaf3")]
+texture_filter = 2
+material = SubResource("ShaderMaterial_i7nrl")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("16_vej4g")
 
-[node name="arms" parent="Camera3D/WeaponAnimations/WeaponManager/M4A2" instance=ExtResource("11_bobw7")]
-transform = Transform3D(-8.00819e-09, 0, -0.183206, 0, 0.183206, 0, 0.183206, 0, -8.00819e-09, 0.301, 0.228, -0.563)
+[node name="AudioStreamPlayer_AK47" type="AudioStreamPlayer3D" parent="Camera3D/WeaponAnimations/WeaponManager/AK47"]
+transform = Transform3D(3.02115, 0, 0, 0, 3.02115, 0, 0, 0, 3.02115, 0, 0, 0)
+stream = ExtResource("12_58g60")
+bus = &"Shoot"
+
+[node name="arms" parent="Camera3D/WeaponAnimations/WeaponManager/AK47" instance=ExtResource("11_bobw7")]
+transform = Transform3D(0.631, 0, 0, 0, 0.631, 0, 0, 0, 0.631, -2.455, 0.727, -1)
 
 [node name="UI" type="Node3D" parent="."]
+script = ExtResource("17_28ejv")
 
-[node name="Label" type="Label" parent="UI"]
-offset_left = 7.0
-offset_top = 567.0
-offset_right = 47.0
-offset_bottom = 591.0
+[node name="FPSLabel" type="Label" parent="UI"]
+visible = false
+material = SubResource("ShaderMaterial_vi3b1")
+offset_left = 15.0
+offset_top = 12.0
+offset_right = 60.0
+offset_bottom = 39.0
 text = "FPS: "
 label_settings = SubResource("LabelSettings_xyaew")
 uppercase = true
-script = ExtResource("16_gp3ui")
+script = ExtResource("16_4dp0m")
+
+[node name="HeartHealthPolar" type="Sprite2D" parent="UI"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_vi3b1")
+position = Vector2(32, 574)
+scale = Vector2(0.718, 0.718)
+texture = ExtResource("19_vhfdq")
+
+[node name="Riffle-ammoIconPolar" type="Sprite2D" parent="UI"]
+material = SubResource("ShaderMaterial_vi3b1")
+position = Vector2(770, 577)
+scale = Vector2(0.471372, 0.427705)
+texture = ExtResource("20_vweys")
+
+[node name="InfiniteIcon" type="Sprite2D" parent="UI"]
+material = SubResource("ShaderMaterial_vi3b1")
+position = Vector2(733.976, 573.976)
+scale = Vector2(0.402, 0.402)
+texture = ExtResource("21_asrgm")
+
+[node name="Ammo-divider-lineIconPolar" type="Sprite2D" parent="UI"]
+material = SubResource("ShaderMaterial_vi3b1")
+position = Vector2(703.976, 574.976)
+scale = Vector2(0.163, 0.234)
+texture = ExtResource("23_qkcj6")
+
+[node name="HPLabel" type="Label" parent="UI"]
+material = SubResource("ShaderMaterial_vi3b1")
+offset_left = 63.0
+offset_top = 557.0
+offset_right = 142.0
+offset_bottom = 600.0
+text = "100
+"
+label_settings = SubResource("LabelSettings_lw566")
+
+[node name="AmmoLabel" type="Label" parent="UI"]
+material = SubResource("ShaderMaterial_vi3b1")
+offset_left = 646.0
+offset_top = 558.0
+offset_right = 699.0
+offset_bottom = 603.0
+text = "30 
+"
+label_settings = SubResource("LabelSettings_lw566")
 
 [node name="Shader" type="ColorRect" parent="UI"]
 visible = false

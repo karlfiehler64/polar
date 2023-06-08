@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var player_manager = $"../../../../PlayerManager"
 @onready var animation_player = $AnimationPlayer_M4A1
-@onready var audiostream_player = $test
+@onready var audiostream_player = $AudioStreamPlayer_M4A1
 
 @onready var weapon_animations = $"../.."
 @onready var camera = player_manager.current_camera
@@ -18,13 +18,13 @@ var reload_volume_boost : float = 2.0
 
 var current_ammo : int = 30
 var ammo : int = 30
-var damage : float = 18
+var damage : float = 100
 var object_name : String = "M4A1"
 var range : float = 100
 var can_shoot : bool = true
 var is_reloading : bool = false
 var rpm : int = 800
-var spray_strength : float = 10
+var spray_strength : float = 1
 var equip_time : float = 1
 var is_equipped : bool = true
 
@@ -50,7 +50,7 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_pressed("action") and can_shoot == true and current_ammo > 0 and !is_reloading:
-		crosshair.crosshair_move(delta)
+		crosshair.crosshair_move()
 		audiostream_player.pitch_scale = random.randf_range(1 - shoot_audio_change, 1 + shoot_audio_change)
 		audiostream_player.stream = shoot_sound
 		audiostream_player.play()
@@ -110,5 +110,14 @@ func _on_animation_player_animation_finished(anim_name):
 		can_shoot = true
 		is_reloading = false
 		animation_player.speed_scale = rpm / 60
+		
+func set_weapon_status(is_enabled):
+	visible = is_enabled
+	if is_enabled:
+		set_process(true)
+		set_physics_process(true)
+	else:
+		set_process(false)
+		set_physics_process(false)
 	
 	

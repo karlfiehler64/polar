@@ -54,8 +54,10 @@ func _physics_process(delta: float) -> void:
 
 func direction_input() -> void:
 	direction = Vector3()
-	var aim: Basis = camera.global_transform.basis
-	direction = aim.z * -input_axis.x + aim.x * input_axis.y
+	var aim_y_rotation = Basis()
+	aim_y_rotation = aim_y_rotation.rotated(Vector3.UP, camera.global_transform.basis.get_euler().y)
+
+	direction = aim_y_rotation.z * -input_axis.x + aim_y_rotation.x * input_axis.y
 	if direction.length() > 0:
 		last_direction = direction
 	

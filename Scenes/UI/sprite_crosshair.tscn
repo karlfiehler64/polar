@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Texture2D" uid="uid://r61tij0nghhb" path="res://Textures/Objects/Crosshairs/image0047.png" id="1_ev4t2"]
-[ext_resource type="Script" path="res://Scripts/UI/sprite_crosshair.gd" id="2_bmjft"]
+[ext_resource type="Script" path="res://Scripts/UI/SpriteCrosshair.gd" id="2_bmjft"]
 
 [node name="Sprite2D" type="Sprite2D"]
 scale = Vector2(0.5, 0.5)

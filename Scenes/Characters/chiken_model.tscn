@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjoecn2emgiha"]
+
+[ext_resource type="PackedScene" uid="uid://ccko8jdv38kum" path="res://Models/Organized/Characters/Chiken/ps1_chicken.glb" id="1_c7udv"]
+
+[node name="ps1_chicken" instance=ExtResource("1_c7udv")]
